@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 
 interface TechFlowIllustrationProps {
   animate?: boolean
@@ -16,11 +17,11 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
     // Create tech flow elements
     const createTechFlowElements = () => {
       const technologies = [
-        { name: "Onchain", icon: "⛓️" },
-        { name: "AI", icon: "🧠" },
-        { name: "Web", icon: "🌐" },
-        { name: "DeFi", icon: "💰" },
-        { name: "Cloud", icon: "☁️" },
+        { name: "Onchain", icon: "/base-logo.png", isSvg: false },
+        { name: "AI", icon: "🧠", isSvg: false },
+        { name: "Web", icon: "🌐", isSvg: false },
+        { name: "USDC", icon: "/usd-logo.svg", isSvg: true },
+        { name: "Cursor", icon: "/cursor-logo.svg", isSvg: true },
       ]
 
       // Create central flow line
@@ -41,8 +42,49 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
 
         const iconCircle = document.createElement("div")
         iconCircle.className =
-          "w-12 h-12 rounded-full bg-white dark:bg-neutral-800 flex items-center justify-center shadow-md mb-2"
-        iconCircle.innerHTML = `<span class="text-xl">${tech.icon}</span>`
+          "w-16 h-16 flex items-center justify-center mb-2"
+        if (tech.isSvg || tech.icon.startsWith('/')) {
+          // Create a container for the Next.js Image component
+          const imgContainer = document.createElement("div")
+          imgContainer.className = "relative w-10 h-10"
+          
+          // We'll add a data attribute with the image source
+          imgContainer.setAttribute('data-src', tech.icon)
+          imgContainer.setAttribute('data-alt', tech.name)
+          
+          // Add a temporary loader
+          const loader = document.createElement("div")
+          loader.className = "absolute inset-0 bg-neutral-200 dark:bg-neutral-700 rounded-full animate-pulse"
+          imgContainer.appendChild(loader)
+          
+          // Store reference to load the actual image after component mounts
+          const loadImage = () => {
+            const img = new window.Image()
+            img.src = tech.icon
+            img.onload = () => {
+              // Replace loader with actual image
+              const imageElement = document.createElement('div')
+              imageElement.className = "relative w-full h-full"
+              
+              // Create image element
+              const imgElement = document.createElement('img')
+              imgElement.src = tech.icon
+              imgElement.alt = tech.name
+              imgElement.className = "w-full h-full object-contain"
+              
+              imageElement.appendChild(imgElement)
+              imgContainer.innerHTML = ''
+              imgContainer.appendChild(imageElement)
+            }
+          }
+          
+          // Load image after a small delay to prevent layout shifts
+          setTimeout(loadImage, 100)
+          iconCircle.appendChild(imgContainer)
+        } else {
+          // Handle emoji icons
+          iconCircle.innerHTML = `<span class="text-4xl">${tech.icon}</span>`
+        }
 
         const label = document.createElement("div")
         label.className = "text-sm font-medium"

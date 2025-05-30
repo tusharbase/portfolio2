@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight } from "lucide-react"
 import { ProjectsIllustration } from "@/components/illustrations/projects-illustration"
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 
 export default function Projects() {
   const [ref, inView] = useInView({
@@ -121,12 +122,16 @@ export default function Projects() {
                   className="project-card flex-shrink-0 w-[300px] group relative rounded-xl overflow-hidden transition-transform hover:scale-105"
                   style={{ scrollSnapAlign: 'start' }}
                 >
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover"
-                    loading="lazy"
-                  />
+                  <div className="relative w-full h-64">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 3} // Only prioritize first few images
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
                     <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
                     <p className="text-sm text-neutral-200 mb-4">

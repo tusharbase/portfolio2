@@ -11,19 +11,27 @@ export function ProfileIllustration() {
 
     // Create profile elements
     const createProfileElements = () => {
-      // Central profile circle
-      const profileCircle = document.createElement("div")
-      profileCircle.className =
-        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center text-neutral-100 dark:text-neutral-900 text-4xl font-bold"
-      profileCircle.textContent = "T"
-      container.appendChild(profileCircle)
+      // Logo container
+      const logoContainer = document.createElement("div")
+      logoContainer.className =
+        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 flex items-center justify-center bg-transparent"
+      
+      const logoImg = document.createElement("img")
+      logoImg.src = "/dance.png"
+      logoImg.alt = "Profile Logo"
+      logoImg.className = "w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal"
+      logoImg.style.webkitUserDrag = 'none'
+      logoImg.style.userSelect = 'none'
+      logoImg.draggable = false
+      logoContainer.appendChild(logoImg)
+      container.appendChild(logoContainer)
 
       // Skill bubbles
       const skills = [
         { name: "Onchain", position: "top-10 left-10" },
         { name: "AI", position: "top-10 right-10" },
-        { name: "Web3", position: "bottom-10 left-10" },
-        { name: "Frontend", position: "bottom-10 right-10" },
+        { name: "Webapps", position: "bottom-10 left-10" },
+        { name: "Vibe Coding", position: "bottom-10 right-10" },
       ]
 
       skills.forEach((skill, index) => {

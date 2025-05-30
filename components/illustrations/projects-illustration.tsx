@@ -21,7 +21,7 @@ export function ProjectsIllustration({ animate = false }: ProjectsIllustrationPr
       container.appendChild(centralLine)
 
       // Create project nodes
-      const projects = ["DeFi", "AI", "Web3"]
+      const projects = ["DeFi", "AI", "Onchain"]
 
       projects.forEach((project, index) => {
         const position = ((index + 1) / (projects.length + 1)) * 100

@@ -32,7 +32,7 @@ export default function Projects() {
       link: "#",
     },
     {
-      title: "Web3 Analytics Platform",
+      title: "Onchain Analytics Platform",
       description:
         "Comprehensive analytics dashboard for onchain data with real-time monitoring and predictive insights.",
       image: "/placeholder.svg?height=600&width=800",

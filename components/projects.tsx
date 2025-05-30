@@ -16,28 +16,36 @@ export default function Projects() {
 
   const projectsData = [
     {
-      title: "DeFi Protocol Suite",
+      title: "Decidoodle",
       description:
-        "Advanced DeFi protocol built on Base Layer 2 with automated yield farming and liquidity management.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["Base L2", "Solidity", "Next.js", "Coinbase SDK"],
-      link: "#",
+        "AI-copilot for decision making.",
+      image: "/desidoodle.png",
+      tags: ["Next.js"],
+      link: "https://decidoodle.vercel.app",
     },
     {
-      title: "AI Trading Engine",
+      title: "Zero Now",
       description:
         "Intelligent trading system powered by AI agents that analyzes market patterns and executes optimal strategies.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["AI Agents", "Python", "TensorFlow", "USDC API"],
-      link: "#",
+      image: "/zeronow.png",
+      tags: ["AI Agents", "AI"],
+      link: "https://zero-now.vercel.app",
     },
     {
-      title: "Onchain Analytics Platform",
+      title: "AI CodeFlow",
       description:
         "Comprehensive analytics dashboard for onchain data with real-time monitoring and predictive insights.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["Next.js", "Supabase", "Web3.js", "D3.js"],
-      link: "#",
+      image: "/aicodeflow.png",
+      tags: ["Next.js", "Supabase", "AI"],
+      link: "https://aicodeflow0.vercel.app",
+    },
+    {
+      title: "PrimePDF",
+      description:
+        "PDF transformation and AI analysis tool.",
+      image: "/primepdf.png",
+      tags: ["Next.js", "Supabase", "AI"],
+      link: "https://primepdf.vercel.app",
     },
   ]
 
@@ -144,7 +152,7 @@ export default function Projects() {
                         </Badge>
                       ))}
                     </div>
-                    <Button size="sm" variant="default" className="bg-white text-neutral-900 hover:bg-neutral-200 w-fit">
+                    <Button size="sm" variant="default" className="bg-white text-neutral-900 hover:bg-neutral-200 w-fit" onClick={() => window.open(project.link, '_blank')}>
                       View Project
                       <ArrowUpRight className="ml-2 h-4 w-4" />
                     </Button>

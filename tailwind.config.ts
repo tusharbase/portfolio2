@@ -61,7 +61,7 @@ const config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)"],
-        space: ["var(--font-space)"],
+        display: ["var(--font-manrope)"],
       },
       keyframes: {
         "accordion-down": {

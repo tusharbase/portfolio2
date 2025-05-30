@@ -4,12 +4,14 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { ModeToggle } from "@/components/mode-toggle"
 
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Tech", href: "#tech" },
+  { name: "Technologies", href: "#technologies" },
   { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ]
 
@@ -28,16 +30,16 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled ? "bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md subtle-shadow py-4" : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           <Link href="#home" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">T</span>
+            <div className="w-8 h-8 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center text-neutral-100 dark:text-neutral-900 font-bold text-lg">
+              T
             </div>
-            <span className="text-xl font-bold font-space">Tushar</span>
+            <span className="text-lg font-medium">Tushar</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -46,16 +48,19 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+                className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors relative group"
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-neutral-900 dark:bg-neutral-100 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Button className="hidden md:block bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700">
-              Let's Talk
+            <ModeToggle />
+
+            <Button className="hidden md:flex" variant="default">
+              Contact Me
             </Button>
 
             {/* Mobile Menu Button */}
@@ -78,14 +83,14 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+                  className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700">
-                Let's Talk
+              <Button className="mt-2" variant="default">
+                Contact Me
               </Button>
             </nav>
           </div>

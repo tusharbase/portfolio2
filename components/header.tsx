@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { ModeToggle } from "@/components/mode-toggle"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -39,7 +38,7 @@ export default function Header() {
             <div className="w-8 h-8 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center text-neutral-100 dark:text-neutral-900 font-bold text-lg">
               T
             </div>
-            <span className="text-lg font-medium">Tushar</span>
+            <span className="text-lg font-medium">tushar.base.eth</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -57,7 +56,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <ModeToggle />
 
             <Button className="hidden md:flex" variant="default">
               Contact Me

@@ -16,8 +16,8 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: "Tushar | Developer & Tech Innovator",
-  description: "Building the future with cutting-edge blockchain, AI, and web technologies",
+  title: "Tushar Mehta | Developer & Tech Innovator",
+  description: "Building the future with cutting-edge onchain, AI, and web technologies",
     generator: 'v0.dev'
 }
 

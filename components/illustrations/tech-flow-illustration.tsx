@@ -16,7 +16,7 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
     // Create tech flow elements
     const createTechFlowElements = () => {
       const technologies = [
-        { name: "Blockchain", icon: "⛓️" },
+        { name: "Onchain", icon: "⛓️" },
         { name: "AI", icon: "🧠" },
         { name: "Web", icon: "🌐" },
         { name: "DeFi", icon: "💰" },

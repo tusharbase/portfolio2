@@ -12,7 +12,7 @@ export default function Technologies() {
 
   const technologies = [
     {
-      category: "Blockchain",
+      category: "Onchain",
       items: [
         { name: "Coinbase SDK", description: "Payment & trading integration" },
         { name: "Base Layer 2", description: "Ethereum scaling solutions" },

@@ -21,7 +21,7 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center text-neutral-100 dark:text-neutral-900 font-bold text-lg">
                   T
                 </div>
-                <span className="text-lg font-medium">Tushar</span>
+                <span className="text-lg font-medium">tushar.base.eth</span>
               </Link>
             </div>
 
@@ -41,7 +41,7 @@ export default function Footer() {
 
           <div className="border-t border-neutral-200 dark:border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              © {currentYear} Tushar. All rights reserved.
+              © {currentYear} tushar.base.eth All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link

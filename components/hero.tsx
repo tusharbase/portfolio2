@@ -41,7 +41,7 @@ export default function Hero() {
             </div>
 
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-lg leading-relaxed">
-              Specialized in cutting-edge technologies including blockchain, AI integration, and modern web development
+              Specialized in cutting-edge technologies including onchain, AI integration, and modern web development
               to create innovative digital solutions.
             </p>
 

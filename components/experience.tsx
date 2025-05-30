@@ -13,10 +13,10 @@ export default function Experience() {
   const experiences = [
     {
       period: "2022 - Present",
-      role: "Senior Blockchain Developer",
+      role: "Senior Onchain Developer",
       company: "TechCorp Innovations",
       description:
-        "Leading development of DeFi protocols on Base Layer 2, implementing smart contracts, and architecting scalable blockchain solutions.",
+        "Leading development of DeFi protocols on Base Layer 2, implementing smart contracts, and architecting scalable onchain solutions.",
       achievements: [
         "Built DeFi protocol handling $10M+ TVL",
         "Reduced gas costs by 60% through optimization",

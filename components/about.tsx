@@ -9,10 +9,10 @@ export default function About() {
   })
 
   const skills = [
-    { name: "Blockchain Development", level: 90 },
-    { name: "AI Integration", level: 85 },
-    { name: "Frontend Development", level: 95 },
-    { name: "Backend Architecture", level: 88 },
+    { name: "Onchain Development", level: 60 },
+    { name: "AI Integration", level: 80 },
+    { name: "Frontend Development", level: 75 },
+    { name: "Backend Architecture", level: 70 },
   ]
 
   return (
@@ -37,7 +37,7 @@ export default function About() {
               <div className="space-y-6 text-neutral-600 dark:text-neutral-400">
                 <p className="text-lg">
                   I'm a developer and tech innovator with expertise in cutting-edge technologies. With a passion for
-                  creating elegant solutions to complex problems, I specialize in blockchain development, AI
+                  creating elegant solutions to complex problems, I specialize in onchain development, AI
                   integration, and modern web applications.
                 </p>
 

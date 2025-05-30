@@ -30,10 +30,13 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
 
       // Create tech nodes
       technologies.forEach((tech, index) => {
-        const position = (index / (technologies.length - 1)) * 100
+        // Calculate position with padding to prevent edge cutoff
+        const padding = 8 // 8% padding on each side
+        const range = 100 - (padding * 2)
+        const position = padding + (index / (technologies.length - 1)) * range
 
         const node = document.createElement("div")
-        node.className = "absolute top-1/2 transform -translate-y-1/2 flex flex-col items-center"
+        node.className = "absolute top-1/2 left-0 transform -translate-y-1/2 flex flex-col items-center"
         node.style.left = `${position}%`
 
         const iconCircle = document.createElement("div")
@@ -96,5 +99,5 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-full relative" />
+  return <div ref={containerRef} className="w-full h-40 relative overflow-visible" />
 }

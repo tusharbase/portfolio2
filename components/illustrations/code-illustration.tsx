@@ -54,7 +54,7 @@ export function CodeIllustration() {
         "build",
         "AI SDK",
         "ETH",
-        "API",
+        "don't die",
         "USDC",
         "base",
         "v0",

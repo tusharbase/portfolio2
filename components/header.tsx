@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -56,10 +56,20 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-
-            <Button className="hidden md:flex" variant="default">
-              Contact Me
-            </Button>
+            <div className="hidden md:flex items-center space-x-4">
+              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
+                <Github className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a href="mailto:hello@example.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
 
             {/* Mobile Menu Button */}
             <Button
@@ -87,9 +97,20 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Button className="mt-2" variant="default">
-                Contact Me
-              </Button>
+              <div className="flex space-x-4 mt-4">
+                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="mailto:hello@example.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
             </nav>
           </div>
         )}

@@ -49,7 +49,7 @@ export default function About() {
               </div>
 
               {/* Skills */}
-              <div className="space-y-6">
+              {/* <div className="space-y-6">
                 <h3 className="text-xl font-semibold">Core Expertise</h3>
                 <div className="space-y-4">
                   {skills.map((skill, index) => (
@@ -67,7 +67,7 @@ export default function About() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

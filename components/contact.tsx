@@ -1,12 +1,17 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+import { useForm, ValidationError } from '@formspree/react';
 import { Button } from "@/components/ui/button"
 import { ContactIllustration } from "@/components/illustrations/contact-illustration"
+import { Loader2, CheckCircle } from "lucide-react"
+
+// Formspree form ID - replace with your actual Formspree form ID
+const FORMSPREE_ID = "mnndpkll"
 
 export default function Contact() {
+  const [state, handleSubmit] = useForm(FORMSPREE_ID);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,11 +23,9 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(formData)
-    // Handle form submission
-    setFormData({ name: "", email: "", message: "" })
+    handleSubmit(e as React.FormEvent<HTMLFormElement>)
   }
 
   return (
@@ -39,15 +42,17 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Illustration */}
-            <div className="relative h-[400px] illustration-container order-2 lg:order-1">
-              <ContactIllustration />
-            </div>
-
+          <div className="flex justify-center">
             {/* Contact Form */}
-            <div className="order-1 lg:order-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="w-full max-w-2xl">
+              {state.succeeded ? (
+                <div className="text-center p-8 bg-card rounded-lg border border-border">
+                  <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+                  <p className="text-muted-foreground">Thank you for reaching out. I'll get back to you soon!</p>
+                </div>
+              ) : (
+                <form onSubmit={onSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-sm font-medium">
                     Name
@@ -61,6 +66,13 @@ export default function Contact() {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
+                    disabled={state.submitting}
+                  />
+                  <ValidationError
+                    prefix="Name"
+                    field="name"
+                    errors={state.errors}
+                    className="text-red-500 text-xs mt-1"
                   />
                 </div>
 
@@ -77,6 +89,13 @@ export default function Contact() {
                     placeholder="your@email.com"
                     value={formData.email}
                     onChange={handleChange}
+                    disabled={state.submitting}
+                  />
+                  <ValidationError
+                    prefix="Email"
+                    field="email"
+                    errors={state.errors}
+                    className="text-red-500 text-xs mt-1"
                   />
                 </div>
 
@@ -93,13 +112,39 @@ export default function Contact() {
                     placeholder="Your message"
                     value={formData.message}
                     onChange={handleChange}
+                    disabled={state.submitting}
                   ></textarea>
+                  <ValidationError
+                    prefix="Message"
+                    field="message"
+                    errors={state.errors}
+                    className="text-red-500 text-xs mt-1"
+                  />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full">
-                  Send Message
-                </Button>
+                <div className="space-y-2">
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full"
+                    disabled={state.submitting}
+                  >
+                    {state.submitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </Button>
+                  <ValidationError
+                    errors={state.errors}
+                    className="text-red-500 text-sm text-center"
+                  />
+                </div>
               </form>
+              )}
             </div>
           </div>
         </div>

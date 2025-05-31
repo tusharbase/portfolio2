@@ -12,44 +12,57 @@ export default function Experience() {
 
   const experiences = [
     {
-      period: "2022 - Present",
-      role: "Senior Onchain Developer",
-      company: "TechCorp Innovations",
+      period: "Jan 2025 - Present",
+      role: "Founder & Creator",
+      company: "Decidoodle",
       description:
-        "Leading development of DeFi protocols on Base Layer 2, implementing smart contracts, and architecting scalable onchain solutions.",
+        "Building an AI-powered web application that transforms complex decision-making into simple, actionable insights. Leading all aspects from concept to launch with a focus on intuitive user experiences.",
       achievements: [
-        "Built DeFi protocol handling $10M+ TVL",
-        "Reduced gas costs by 60% through optimization",
-        "Led team of 5 developers",
+        "Developing AI-driven features that make complex decision-making accessible",
+        "Creating a seamless, intuitive interface using modern web technologies",
+        "Building a product that helps users navigate life's important choices"
       ],
-      tech: ["Solidity", "Base L2", "Next.js", "TypeScript"],
+      tech: ["AI/ML", "Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
     },
     {
-      period: "2021 - 2022",
-      role: "Full Stack Developer",
-      company: "AI Solutions Inc",
+      period: "Jun 2023 - Jan 2025",
+      role: "Senior Solution Engineer",
+      company: "Edgio",
       description:
-        "Developed AI-powered applications using cutting-edge machine learning technologies and modern web frameworks.",
+        "Played a key role in bridging the gap between technical solutions and customer needs in the CDN and security space.",
       achievements: [
-        "Created AI trading bot with 94% accuracy",
-        "Implemented real-time data processing",
-        "Optimized application performance by 200%",
+        "Led technical presentations and demos for enterprise clients, translating complex solutions into business value",
+        "Collaborated with sales teams to understand and address customer requirements",
+        "Conducted successful product trials and ensured customer success"
       ],
-      tech: ["Python", "TensorFlow", "React", "Node.js"],
+      tech: ["CDN", "Cloud Security", "Pre-sales", "Technical Consulting"],
     },
     {
-      period: "2020 - 2021",
-      role: "Frontend Developer",
-      company: "StartupXYZ",
+      period: "Oct 2016 - Jun 2023",
+      role: "Advanced Services Engineer",
+      company: "Limelight Networks (Edgio)",
       description:
-        "Built responsive web applications and collaborated with design teams to create exceptional user experiences.",
+        "Provided technical expertise in content delivery and security solutions, ensuring optimal performance for clients.",
       achievements: [
-        "Delivered 15+ production applications",
-        "Improved user engagement by 150%",
-        "Mentored junior developers",
+        "Executed successful proof of concepts for enterprise clients",
+        "Resolved complex technical issues in production environments",
+        "Contributed to the evolution of CDN and security solutions"
       ],
-      tech: ["React", "JavaScript", "CSS", "Git"],
+      tech: ["Networking", "Troubleshooting", "POC Execution", "Technical Support"],
     },
+    {
+      period: "2007 - 2016",
+      role: "Software Engineering Roles",
+      company: "Various Companies",
+      description:
+        "Built a strong foundation in software engineering across embedded systems, Linux kernel development, and system programming.",
+      achievements: [
+        "Developed Linux system software and device drivers",
+        "Led technical projects and mentored junior engineers",
+        "Gained deep expertise in low-level programming and system architecture"
+      ],
+      tech: ["C/C++", "Linux Kernel", "Embedded Systems", "System Architecture"],
+    }
   ]
 
   return (

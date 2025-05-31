@@ -456,16 +456,24 @@
   transition: width 1s ease;
 }
 
+/* Hide scroll indicator by default, will be shown on md screens and up */
 .scroll-indicator {
+  display: none;
   position: absolute;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 0.6;
   transition: opacity 0.3s ease;
+}
+
+/* Show scroll indicator on md screens and up */
+@screen md {
+  .scroll-indicator {
+    display: flex;
+  }
 }
 
 .scroll-indicator:hover {

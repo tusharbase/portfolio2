@@ -23,7 +23,7 @@ export function TimelineIllustration({ animate = false }: TimelineIllustrationPr
       // Create year markers
       const currentYear = new Date().getFullYear()
       const currentMonth = new Date().getMonth()
-      const startYear = 2020
+      const startYear = 2007 // Updated to match earliest experience
       const years = Array.from({ length: currentYear - startYear + 1 }, (_, i) => startYear + i)
       
       // Define marker type
@@ -57,7 +57,7 @@ export function TimelineIllustration({ animate = false }: TimelineIllustrationPr
           year,
           isYear: true,
           isCurrentYear: false,
-          monthIndex: 0 // Add default monthIndex for type safety
+          monthIndex: 0
         }]
       })
 
@@ -66,59 +66,82 @@ export function TimelineIllustration({ animate = false }: TimelineIllustrationPr
 
         // Create marker container
         const markerEl = document.createElement("div")
-        markerEl.className = `absolute top-1/2 transform -translate-y-1/2 flex flex-col items-center ${marker.isCurrentYear ? 'current-year-marker' : ''}`
+        markerEl.className = `absolute top-1/2 transform -translate-y-1/2 flex flex-col items-center transition-opacity duration-300 ${
+          marker.isCurrentYear ? 'current-year-marker' : ''
+        }`
         markerEl.style.left = `${position}%`
 
-        // Create dot (only show for year markers and current month)
+        // Create dot (only show for significant markers)
         if (marker.isYear || (marker.isCurrentYear && marker.label)) {
           const dot = document.createElement("div")
-          dot.className = `w-3 h-3 rounded-full ${marker.isCurrentYear ? 'bg-blue-500' : 'bg-neutral-400 dark:bg-neutral-500'} mb-1`
+          dot.className = `w-2 h-2 rounded-full ${
+            marker.isCurrentYear ? 'bg-blue-500 scale-125' : 'bg-neutral-400 dark:bg-neutral-500'
+          } mb-2 transform transition-transform duration-300`
 
           if (animate) {
-            dot.classList.add("animate")
-            dot.style.animationDelay = `${index * 0.1}s`
+            dot.classList.add("opacity-0")
+            setTimeout(() => {
+              dot.classList.remove("opacity-0")
+              dot.classList.add("opacity-100")
+            }, index * 100)
           }
+
           markerEl.appendChild(dot)
         }
 
-        // Create label container
+        // Create label container with improved typography and spacing
         const label = document.createElement("div")
-        label.className = `text-xs font-medium text-center ${marker.isCurrentYear && !marker.isYear ? 'text-blue-500' : ''} min-w-[40px]`
+        label.className = `text-xs font-medium text-center transition-colors duration-300 ${
+          marker.isCurrentYear ? 'text-blue-500' : 'text-neutral-600 dark:text-neutral-400'
+        }`
         
-        // Add year and month labels with better spacing
-        if (marker.isYear) {
-          const yearLabel = document.createElement("div")
-          yearLabel.textContent = marker.label
-          yearLabel.className = "font-medium text-sm"
-          label.appendChild(yearLabel)
-        } else if (marker.isCurrentYear && marker.label) {
-          const monthLabel = document.createElement("div")
-          monthLabel.textContent = marker.label
-          monthLabel.className = "text-xs opacity-80"
-          label.appendChild(monthLabel)
-          
+        // Add year and month labels
+        if (marker.isYear || (marker.isCurrentYear && marker.label)) {
           if (marker.year) {
             const yearLabel = document.createElement("div")
             yearLabel.textContent = marker.year.toString()
-            yearLabel.className = "font-bold text-sm"
-            label.insertBefore(yearLabel, label.firstChild)
+            yearLabel.className = "font-semibold text-sm mb-1"
+            label.appendChild(yearLabel)
+          }
+          
+          if (marker.label && !marker.isYear) {
+            const monthLabel = document.createElement("div")
+            monthLabel.textContent = marker.label
+            monthLabel.className = "text-xs opacity-80"
+            label.appendChild(monthLabel)
           }
         }
 
         markerEl.appendChild(label)
         container.appendChild(markerEl)
+
+        // Add hover effects
+        markerEl.addEventListener('mouseenter', () => {
+          markerEl.classList.add('scale-110')
+          markerEl.style.zIndex = '10'
+        })
+        
+        markerEl.addEventListener('mouseleave', () => {
+          markerEl.classList.remove('scale-110')
+          markerEl.style.zIndex = ''
+        })
       })
     }
 
     createTimelineElements()
 
     return () => {
-      // Clean up
       while (container.firstChild) {
         container.removeChild(container.firstChild)
       }
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-full relative" suppressHydrationWarning />
+  return (
+    <div 
+      ref={containerRef} 
+      className="w-full h-full relative select-none" 
+      suppressHydrationWarning 
+    />
+  )
 }

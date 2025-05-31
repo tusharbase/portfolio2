@@ -301,7 +301,7 @@ export default function Experience() {
     threshold: 0.05, // Adjusted threshold
   });
 
-  const [expandedCompanyItems, setExpandedCompanyItems] = useState<number[]>([0]); // Expand first company item by default
+  const [expandedCompanyItems, setExpandedCompanyItems] = useState<number[]>([]); // Start with no items expanded
 
   const toggleCompanyExpand = (index: number) => {
     setExpandedCompanyItems((current) =>

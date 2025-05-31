@@ -12,6 +12,7 @@ export default function Footer() {
               <Link 
                 href="#home" 
                 scroll={true}
+                prefetch={false}
                 className="hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
               >
                 tushar.base.eth

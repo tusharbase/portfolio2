@@ -47,6 +47,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={false}
                 className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors relative group"
               >
                 {item.name}
@@ -57,18 +58,18 @@ export default function Header() {
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-4">
-              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
+              <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                 <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
+              </Link>
+              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
+              </Link>
+              <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="mailto:hello@example.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
+              </Link>
+              <Link href="mailto:tusharbase.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />
-              </a>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -98,18 +99,18 @@ export default function Header() {
                 </Link>
               ))}
               <div className="flex space-x-4 mt-4">
-                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
+                <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                   <Github className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
+                </Link>
+                <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
                   <Twitter className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
+                </Link>
+                <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
                   <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="mailto:hello@example.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
+                </Link>
+                <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
                   <Mail className="w-5 h-5" />
-                </a>
+                </Link>
               </div>
             </nav>
           </div>

@@ -361,13 +361,13 @@ export default function Experience() {
       period: "Oct 2016 - Jan 2025",
       role: "Senior Solution Engineer", // Combined roles for brevity
       company: "Edgio (formerly Limelight Networks)",
-      description: "Played a key role in bridging the gap between technical solutions and customer needs in the CDN and security space. Provided advanced technical expertise, led pre-sales engineering efforts, and ensured customer success through PoCs and complex issue resolution.",
+      description: "Bridged technical solutions and customer needs in CDN/security, leading pre-sales engineering and ensuring customer success through PoCs and issue resolution.",
       achievements: [
-        "Led technical presentations and product demonstrations for Fortune 500 clients, translating complex solutions into tangible business value.",
-        "Designed and executed successful Proof of Concepts (PoCs) for enterprise customers, leading to significant contract wins.",
-        "Collaborated closely with sales, product, and engineering teams to define customer requirements and shape product strategy.",
-        "Provided expert-level troubleshooting and resolution for complex technical issues in large-scale production environments.",
-        "Authored technical documentation and internal knowledge base articles for CDN and security solutions."
+        "Delivered technical presentations and product demos to Fortune 500 clients, driving business value",
+        "Executed successful PoCs that secured major enterprise contracts",
+        "Aligned cross-functional teams on customer requirements and product strategy",
+        "Resolved complex technical issues in large-scale production environments",
+        "Created comprehensive technical documentation for CDN and security solutions"
       ],
       tech: ["CDN", "WAF", "Bot Management", "DDoS Mitigation", "Cloud Security", "Pre-sales Engineering", "Technical Consulting"],
     },
@@ -375,12 +375,11 @@ export default function Experience() {
       period: "2007 - 2016",
       role: "Software Engineering Roles (Embedded, Linux Kernel, TCP/IP Stack)",
       company: "Various Companies",
-      description: "Built a strong foundation in software engineering across diverse domains including embedded systems, Linux kernel development, and system-level programming. Contributed to all phases of the software development lifecycle.",
-      achievements: [
-        "Developed and maintained Linux device drivers and kernel modules for custom hardware.",
-        "Designed and implemented real-time embedded software for industrial control systems.",
-        "Led small technical projects, mentored junior engineers, and contributed to system architecture design.",
-        "Gained deep expertise in C/C++, low-level debugging, and performance optimization.",
+      description: "Bridged technical solutions and customer needs in CDN/security, leading pre-sales engineering and ensuring customer success through PoCs and issue resolution.",      achievements: [
+        "Developed Linux device drivers and kernel modules for custom hardware",
+        "Built real-time embedded software for industrial control systems",
+        "Led technical projects and mentored junior engineers",
+        "Optimized system performance through low-level debugging"
       ],
       tech: ["C", "C++", "Linux Kernel Development", "Network Device Drivers", "Embedded Systems", "System Architecture"],
     },

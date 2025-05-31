@@ -34,7 +34,17 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
         // Calculate position with padding to prevent edge cutoff
         const padding = 8 // 8% padding on each side
         const range = 100 - (padding * 2)
-        const position = padding + (index / (technologies.length - 1)) * range
+        // Adjust spacing for mobile to prevent overflow
+        let position = padding + (index / (technologies.length - 1)) * range
+        
+        // Add responsive adjustments for mobile
+        const isMobile = window.innerWidth < 768 // Tailwind's md breakpoint
+        if (isMobile) {
+          // Slightly reduce the range on mobile to prevent edge crowding
+          const mobilePadding = 12
+          const mobileRange = 100 - (mobilePadding * 2)
+          position = mobilePadding + (index / (technologies.length - 1)) * mobileRange
+        }
 
         const node = document.createElement("div")
         node.className = "absolute top-1/2 left-0 transform -translate-y-1/2 flex flex-col items-center"
@@ -42,11 +52,11 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
 
         const iconCircle = document.createElement("div")
         iconCircle.className =
-          "w-16 h-16 flex items-center justify-center mb-2"
+"w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-1 md:mb-2"
         if (tech.isSvg || tech.icon.startsWith('/')) {
           // Create a container for the Next.js Image component
           const imgContainer = document.createElement("div")
-          imgContainer.className = "relative w-10 h-10"
+          imgContainer.className = "relative w-8 h-8 md:w-10 md:h-10"
           
           // We'll add a data attribute with the image source
           imgContainer.setAttribute('data-src', tech.icon)
@@ -87,7 +97,7 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
         }
 
         const label = document.createElement("div")
-        label.className = "text-sm font-medium"
+        label.className = "text-xs md:text-sm font-medium"
         label.textContent = tech.name
 
         node.appendChild(iconCircle)
@@ -105,7 +115,7 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
         for (let i = 0; i < 5; i++) {
           const dot = document.createElement("div")
           dot.className =
-            "absolute top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
+            "absolute top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-neutral-400/80 dark:bg-neutral-500/80"
           dot.style.left = "-10px"
           dot.style.animationDelay = `${i * 1}s`
 
@@ -141,5 +151,5 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-40 relative overflow-visible" />
+  return <div ref={containerRef} className="w-full h-32 md:h-40 relative overflow-visible" />
 }

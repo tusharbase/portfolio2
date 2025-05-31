@@ -30,7 +30,7 @@ export default function Hero() {
             <div>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 text-sm mb-6">
                 <span className="w-2 h-2 bg-neutral-900 dark:bg-neutral-100 rounded-full mr-2"></span>
-                Developer & Tech Innovator
+                Thinker & Tech Builder
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight leading-tight">
                 Building the <br />
@@ -42,11 +42,20 @@ export default function Hero() {
 
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-lg leading-relaxed">
               Specialized in cutting-edge technologies including onchain, AI integration, and modern web development
-              to create innovative digital solutions.
+              to create next generation digital solutions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="group">
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => {
+                  const experienceSection = document.getElementById("experience");
+                  if (experienceSection) {
+                    experienceSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 View My Work
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>

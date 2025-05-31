@@ -3,7 +3,6 @@ import About from "@/components/about"
 import Technologies from "@/components/technologies"
 import Projects from "@/components/projects"
 import Experience from "@/components/experience"
-import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <Technologies />
       <Projects />
       <Experience />
-      <Contact />
       <Footer />
     </main>
   )

@@ -3,19 +3,20 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail, MessageCircle } from "lucide-react"
+import { ContactDialog } from "@/components/contact-dialog"
 
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Technologies", href: "#technologies" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Experience", href: "#experience" }
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +54,14 @@ export default function Header() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-neutral-900 dark:bg-neutral-100 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+            <Button 
+              variant="default" 
+              size="sm"
+              className="ml-2"
+              onClick={() => setContactOpen(true)}
+            >
+              Contact Me
+            </Button>
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -80,6 +89,7 @@ export default function Header() {
               <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </Link>
+              <ContactDialog open={contactOpen} onOpenChange={setContactOpen} />
             </div>
           </div>
         </div>

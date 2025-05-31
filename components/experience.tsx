@@ -208,8 +208,8 @@ const ProjectEventCard = ({ item, isLatest }: { item: ProjectEventItem, isLatest
           colorClasses.dot[currentType.color as keyof typeof colorClasses.dot],
           "ring-4 ring-white dark:ring-neutral-900 shadow-md",
           "group-hover:scale-110 group-hover:shadow-lg",
-           isLatest && "ring-offset-2 ring-offset-background ring-2 ring-opacity-70 animate-pulse",
-           item.isMajor && "w-6 h-6"
+          isLatest && "ring-offset-2 ring-offset-background ring-2 ring-opacity-70 animate-pulse",
+          item.isMajor && "w-6 h-6"
         )}
         title={currentType.name}
       >
@@ -253,7 +253,7 @@ const ProjectEventCard = ({ item, isLatest }: { item: ProjectEventItem, isLatest
               </Badge>
             )}
           </div>
-
+          
           <h3 className="text-lg md:text-xl font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {item.title}
           </h3>
@@ -311,16 +311,16 @@ export default function Experience() {
     );
   };
 
-  const projectEventTimeline: ProjectEventItem[] = [
+  const projectEventTimeline = [
     // Add your future projects/events here, most recent first.
     // Example:
     {
       id: "pe-ai-writing-beta",
       date: "Feb 2025",
-      type: "project",
+      type: "project" as const,
       title: "AI Writing Assistant - Beta Launch",
       description: "Successfully launched the beta version of an AI writing assistant featuring custom fine-tuned models. Currently gathering user feedback for iterative improvements.",
-      status: "Ongoing",
+      status: "Ongoing" as const,
       technologies: ["Python", "PyTorch", "FastAPI", "Next.js", "Supabase", "LangChain"],
       link: "#", // Replace with actual link
       linkText: "Track Progress",
@@ -329,10 +329,10 @@ export default function Experience() {
     {
       id: "pe-decidoodle-launch",
       date: "Jan 2025",
-      type: "project",
+      type: "project" as const,
       title: "Decidoodle - AI Decision-Making App Launched",
       description: "Launched Decidoodle, an AI-powered web application to assist users in making complex decisions. Built with Next.js, TypeScript, and Supabase, leveraging OpenAI API for core logic.",
-      status: "Completed",
+      status: "Completed" as const,
       technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "OpenAI API", "Vercel"],
       link: "#", // Replace with actual link
       linkText: "Visit Decidoodle",
@@ -341,43 +341,25 @@ export default function Experience() {
     {
       id: "pe-independent-dev",
       date: "Jan 2025",
-      type: "milestone",
-      title: "Transition to Independent Developer & Entrepreneur",
-      description: "Embarked on a new journey as a full-time independent developer and entrepreneur. Focusing on building innovative web applications and exploring emerging AI and web technologies.",
-      status: "Completed",
+      type: "milestone" as const,
+      title: "Transition to Independent Learner & Builder",
+      description: "Embarked on a new journey as a full-time independent learner and builder. Focusing on building web applications and exploring emerging AI technologies and digital assets.",
+      status: "Ongoing" as const,
     },
-    // The original data for "Independent Developer & Entrepreneur" can be broken down:
-    // {
-    //   id: "pe-productivity-toolkit",
-    //   date: "Early 2025", // Example
-    //   type: "project",
-    //   title: "Developer Productivity Toolkit (Concept)",
-    //   description: "Began development of a productivity toolkit for developers, including browser extensions.",
-    //   status: "Planned",
-    //   technologies: ["Chrome Extensions API", "React", "TypeScript"],
-    // },
-    // {
-    //   id: "pe-oss-contributions",
-    //   date: "Ongoing from Jan 2025",
-    //   type: "oss",
-    //   title: "Open Source Contributions",
-    //   description: "Actively contributing to various open-source projects and sharing knowledge through technical articles.",
-    //   status: "Ongoing",
-    //   technologies: ["Git", "Community Engagement"],
-    //   linkText: "View GitHub Profile",
-    //   link: "https://github.com/yourusername" // Replace
-    // }
-  ].sort((a, b) => { // Sort by date, ensuring "Jan 2025" comes before "Feb 2025"
+  ] as const satisfies readonly ProjectEventItem[];
+
+  const sortedProjectEventTimeline = [...projectEventTimeline].sort((a, b) => { // Sort by date, ensuring "Jan 2025" comes before "Feb 2025"
     const dateA = new Date(a.date.includes(" ") ? a.date : `${a.date} 1, ${new Date().getFullYear()}`); // Robust date parsing
     const dateB = new Date(b.date.includes(" ") ? b.date : `${b.date} 1, ${new Date().getFullYear()}`);
     if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) return 0; // Handle invalid dates gracefully
     return dateB.getTime() - dateA.getTime();
   });
 
+  // Use the sorted timeline
   const companyExperiences: CompanyExperienceItem[] = [
     {
       period: "Oct 2016 - Jan 2025",
-      role: "Senior Solution Engineer / Advanced Services Engineer", // Combined roles for brevity
+      role: "Senior Solution Engineer", // Combined roles for brevity
       company: "Edgio (formerly Limelight Networks)",
       description: "Played a key role in bridging the gap between technical solutions and customer needs in the CDN and security space. Provided advanced technical expertise, led pre-sales engineering efforts, and ensured customer success through PoCs and complex issue resolution.",
       achievements: [
@@ -387,12 +369,12 @@ export default function Experience() {
         "Provided expert-level troubleshooting and resolution for complex technical issues in large-scale production environments.",
         "Authored technical documentation and internal knowledge base articles for CDN and security solutions."
       ],
-      tech: ["CDN", "WAF", "Bot Management", "DDoS Mitigation", "Cloud Security", "Pre-sales Engineering", "Technical Consulting", "Networking", "Linux", "Scripting (Python, Bash)"],
+      tech: ["CDN", "WAF", "Bot Management", "DDoS Mitigation", "Cloud Security", "Pre-sales Engineering", "Technical Consulting"],
     },
     {
       period: "2007 - 2016",
-      role: "Software Engineering Roles (Embedded, Kernel, Systems)",
-      company: "Various Companies (e.g., [Previous Company Name if notable])",
+      role: "Software Engineering Roles (Embedded, Linux Kernel, TCP/IP Stack)",
+      company: "Various Companies",
       description: "Built a strong foundation in software engineering across diverse domains including embedded systems, Linux kernel development, and system-level programming. Contributed to all phases of the software development lifecycle.",
       achievements: [
         "Developed and maintained Linux device drivers and kernel modules for custom hardware.",
@@ -400,7 +382,7 @@ export default function Experience() {
         "Led small technical projects, mentored junior engineers, and contributed to system architecture design.",
         "Gained deep expertise in C/C++, low-level debugging, and performance optimization.",
       ],
-      tech: ["C", "C++", "Linux Kernel Development", "Device Drivers", "Embedded Systems", "RTOS", "System Architecture", "GDB", "Assembly"],
+      tech: ["C", "C++", "Linux Kernel Development", "Network Device Drivers", "Embedded Systems", "System Architecture"],
     },
   ];
 
@@ -419,8 +401,8 @@ export default function Experience() {
       <div className="relative">
         <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-700 -z-10" aria-hidden="true" />
 
-        <div className="mt-8 space-y-2"> {/* Added space-y-2 for slight overall spacing */}
-          {projectEventTimeline.map((item, index) => (
+        <div className="mt-8 space-y-2">
+          {sortedProjectEventTimeline.map((item, index) => (
             <ProjectEventCard
               key={item.id}
               item={item}

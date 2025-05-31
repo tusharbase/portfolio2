@@ -4,6 +4,7 @@ import { Inter, Manrope } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/header"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "sonner"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +33,23 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
           {children}
+          <Toaster
+            position="bottom-right"
+            richColors
+            theme="light"
+            toastOptions={{
+              classNames: {
+                toast: 'group border-2 border-border bg-background text-foreground',
+                title: 'font-semibold',
+                description: 'text-muted-foreground',
+                actionButton: 'bg-primary text-primary-foreground hover:bg-primary/90',
+                cancelButton: 'bg-muted text-muted-foreground hover:bg-muted/80',
+                success: 'border-green-500/20',
+                error: 'border-red-500/20',
+                loading: 'border-border',
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

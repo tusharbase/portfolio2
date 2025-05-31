@@ -3,10 +3,11 @@
 import { useInView } from "react-intersection-observer"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, ExternalLink, CheckCircle, Zap, BookOpen, Users, Edit3, Star } from "lucide-react" // Added more icons
 import { cn } from "@/lib/utils"
 
-interface ExperienceItem {
+// Interface for company experiences (pre-Jan 2025)
+interface CompanyExperienceItem {
   period: string;
   role: string;
   company: string;
@@ -15,9 +16,25 @@ interface ExperienceItem {
   tech: string[];
 }
 
+// Interface for project/event timeline (Jan 2025 onwards)
+interface ProjectEventItem {
+  id: string;
+  date: string; // e.g., "Jan 2025", "Feb 15, 2025", "Q1 2025"
+  type: "project" | "event" | "milestone" | "learning" | "oss" | "post";
+  title: string;
+  description: string;
+  status?: "Ongoing" | "Completed" | "Published" | "Planned" | "Attended";
+  technologies?: string[];
+  link?: string;
+  linkText?: string;
+  isMajor?: boolean; // For highlighting significant items
+}
+
+// Existing ExperienceCard for CompanyExperienceItem (mostly unchanged)
+// Props are exp, index, isExpanded, toggleExpand
 interface ExperienceCardProps {
-  exp: ExperienceItem;
-  index: number;
+  exp: CompanyExperienceItem;
+  index: number; // Index within its own list
   isExpanded: boolean;
   toggleExpand: (index: number) => void;
 }
@@ -40,7 +57,7 @@ const ExperienceCard = ({ exp, index, isExpanded, toggleExpand }: ExperienceCard
           isExpanded && "scale-125 bg-gradient-to-r from-blue-500 to-purple-600 shadow-xl",
         )}
         onClick={() => toggleExpand(index)}
-        style={{ top: '50%' }}
+        style={{ top: 'calc(2.5rem + 1px)' }} // Align with title consistently
       >
         <div
           className={cn(
@@ -71,11 +88,7 @@ const ExperienceCard = ({ exp, index, isExpanded, toggleExpand }: ExperienceCard
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
                   {exp.period}
                 </span>
-                {index === 0 && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
-                    Current
-                  </span>
-                )}
+                {/* "Current" badge removed as this card is for past roles only */}
               </div>
               <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {exp.role}
@@ -109,10 +122,10 @@ const ExperienceCard = ({ exp, index, isExpanded, toggleExpand }: ExperienceCard
           <div
             className={cn(
               "transition-all duration-500 ease-out",
-              isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden",
+              isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0 overflow-hidden", // Increased max-h for more content
             )}
           >
-            <div className="pt-2 border-t border-neutral-200/50 dark:border-neutral-700/50">
+            <div className="pt-4 mt-4 border-t border-neutral-200/50 dark:border-neutral-700/50">
               <div className="space-y-3 mb-6">
                 <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide">
                   Key Achievements
@@ -122,7 +135,7 @@ const ExperienceCard = ({ exp, index, isExpanded, toggleExpand }: ExperienceCard
                     key={achIndex}
                     className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400 group/achievement"
                   >
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0 group-hover/achievement:scale-125 transition-transform" />
+                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-[7px] flex-shrink-0 group-hover/achievement:scale-125 transition-transform" />
                     <span className="leading-relaxed">{achievement}</span>
                   </div>
                 ))}
@@ -146,94 +159,291 @@ const ExperienceCard = ({ exp, index, isExpanded, toggleExpand }: ExperienceCard
   );
 };
 
+
+// New component for Project/Event items (Jan 2025 onwards)
+const ProjectEventCard = ({ item, isLatest }: { item: ProjectEventItem, isLatest: boolean }) => {
+  const typeConfig = {
+    project: { icon: <Zap className="w-3 h-3" />, color: "blue", name: "Project" },
+    event: { icon: <Users className="w-3 h-3" />, color: "purple", name: "Event" },
+    milestone: { icon: <Star className="w-3 h-3" />, color: "green", name: "Milestone" },
+    learning: { icon: <BookOpen className="w-3 h-3" />, color: "yellow", name: "Learning" },
+    oss: { icon: <CheckCircle className="w-3 h-3" />, color: "orange", name: "OSS Contribution" },
+    post: { icon: <Edit3 className="w-3 h-3" />, color: "teal", name: "Article/Post" },
+  };
+
+  const currentType = typeConfig[item.type] || typeConfig.project;
+
+  const colorClasses = {
+    dot: {
+      blue: "bg-blue-500",
+      purple: "bg-purple-500",
+      green: "bg-green-500",
+      yellow: "bg-yellow-500",
+      orange: "bg-orange-500",
+      teal: "bg-teal-500",
+    },
+    badge: {
+      blue: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-500/30",
+      purple: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border-purple-500/30",
+      green: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-500/30",
+      yellow: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border-yellow-500/30",
+      orange: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border-orange-500/30",
+      teal: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400 border-teal-500/30",
+    },
+    borderLeft: { // For isMajor
+      blue: "border-l-blue-500",
+      purple: "border-l-purple-500",
+      green: "border-l-green-500",
+      yellow: "border-l-yellow-500",
+      orange: "border-l-orange-500",
+      teal: "border-l-teal-500",
+    }
+  };
+
+  return (
+    <div className="relative pl-16 mb-10 group">
+      <div
+        className={cn(
+          "absolute left-8 top-7 -translate-y-1/2 w-5 h-5 -translate-x-1/2 rounded-full flex items-center justify-center transition-all duration-300 z-10",
+          colorClasses.dot[currentType.color as keyof typeof colorClasses.dot],
+          "ring-4 ring-white dark:ring-neutral-900 shadow-md",
+          "group-hover:scale-110 group-hover:shadow-lg",
+           isLatest && "ring-offset-2 ring-offset-background ring-2 ring-opacity-70 animate-pulse",
+           item.isMajor && "w-6 h-6"
+        )}
+        title={currentType.name}
+      >
+        <span className="text-white">{currentType.icon}</span>
+      </div>
+
+      <div
+        className={cn(
+          "relative bg-white dark:bg-neutral-800/60 backdrop-blur-md rounded-xl transition-all duration-300",
+          "border border-neutral-200/60 dark:border-neutral-700/60",
+          "hover:shadow-[0_15px_35px_rgba(0,0,0,0.07)] dark:hover:shadow-[0_15px_35px_rgba(0,0,0,0.25)]",
+          "hover:border-neutral-300/80 dark:hover:border-neutral-600/80",
+          "group-hover:-translate-y-1",
+          item.isMajor && "border-l-4", 
+          item.isMajor && colorClasses.borderLeft[currentType.color as keyof typeof colorClasses.borderLeft]
+        )}
+      >
+        <div className="p-5 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+            <div className="flex items-center gap-3 mb-2 sm:mb-0">
+              <Badge variant="outline" className={cn("font-semibold", colorClasses.badge[currentType.color as keyof typeof colorClasses.badge])}>
+                {currentType.name}
+              </Badge>
+              <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+                {item.date}
+              </span>
+              {isLatest && (
+                <Badge variant="default" className="bg-pink-500/20 text-pink-700 dark:text-pink-400 border-pink-500/30">
+                  Latest
+                </Badge>
+              )}
+            </div>
+            {item.status && (
+              <Badge variant="secondary"
+                     className={cn(
+                        item.status === "Completed" || item.status === "Published" || item.status === "Attended" ? "bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/30" :
+                        item.status === "Ongoing" ? "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 border-yellow-500/30" :
+                        item.status === "Planned" ? "bg-gray-500/20 text-gray-700 dark:text-gray-400 border-gray-500/30" : ""
+                     )}>
+                {item.status}
+              </Badge>
+            )}
+          </div>
+
+          <h3 className="text-lg md:text-xl font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {item.title}
+          </h3>
+          
+          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 text-sm">
+            {item.description}
+          </p>
+
+          {item.technologies && item.technologies.length > 0 && (
+            <div className="mb-4">
+              <h4 className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide mb-2">
+                Key Technologies
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {item.technologies.map((tech, techIndex) => (
+                  <Badge key={techIndex} variant="outline" className="font-normal text-xs py-1">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {item.link && (
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group/link mt-2"
+            >
+              {item.linkText || "Learn More"}
+              <ExternalLink className="h-3.5 w-3.5 ml-1.5 transition-transform group-hover/link:translate-x-0.5" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export default function Experience() {
-  const [ref] = useInView({
+  const { ref } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.05, // Adjusted threshold
   });
 
-  const [expandedItems, setExpandedItems] = useState<number[]>([0]);
+  const [expandedCompanyItems, setExpandedCompanyItems] = useState<number[]>([0]); // Expand first company item by default
 
-  const toggleExpand = (index: number) => {
-    setExpandedItems((current: number[]) => 
-      current.includes(index) 
-        ? current.filter((i: number) => i !== index) 
+  const toggleCompanyExpand = (index: number) => {
+    setExpandedCompanyItems((current) =>
+      current.includes(index)
+        ? current.filter((i) => i !== index)
         : [...current, index]
     );
   };
 
-  const experiences: ExperienceItem[] = [
+  const projectEventTimeline: ProjectEventItem[] = [
+    // Add your future projects/events here, most recent first.
+    // Example:
     {
-      period: "Jan 2025 - Present",
-      role: "Independent Developer & Entrepreneur",
-      company: "Personal Projects",
-      description: "Transitioning to full-time independent development, focusing on building innovative web applications and exploring new technologies.",
-      achievements: [
-        "Launched Decidoodle - An AI-powered decision-making web app (Next.js, TypeScript, Supabase)",
-        "Building an AI writing assistant with custom fine-tuned models (Python, PyTorch, FastAPI)",
-        "Developing a productivity toolkit for developers with browser extensions (Chrome Extensions API, React)",
-        "Contributing to open-source projects and sharing knowledge through technical writing"
-      ],
-      tech: ["Next.js", "TypeScript", "Python", "AI/ML", "Supabase", "Tailwind CSS", "FastAPI"],
+      id: "pe-ai-writing-beta",
+      date: "Feb 2025",
+      type: "project",
+      title: "AI Writing Assistant - Beta Launch",
+      description: "Successfully launched the beta version of an AI writing assistant featuring custom fine-tuned models. Currently gathering user feedback for iterative improvements.",
+      status: "Ongoing",
+      technologies: ["Python", "PyTorch", "FastAPI", "Next.js", "Supabase", "LangChain"],
+      link: "#", // Replace with actual link
+      linkText: "Track Progress",
+      isMajor: true,
     },
     {
-      period: "Oct 2016 - Jan 2025",
-      role: "Senior Solution Engineer",
-      company: "Edgio",
-      description: "Played a key role in bridging the gap between technical solutions and customer needs in the CDN and security space.",
-      achievements: [
-        "Led technical presentations and demos for enterprise clients, translating complex solutions into business value",
-        "Collaborated with sales teams to understand and address customer requirements",
-        "Conducted successful product trials and ensured customer success",
-      ],
-      tech: ["CDN", "Cloud Security", "Pre-sales", "Technical Consulting"],
+      id: "pe-decidoodle-launch",
+      date: "Jan 2025",
+      type: "project",
+      title: "Decidoodle - AI Decision-Making App Launched",
+      description: "Launched Decidoodle, an AI-powered web application to assist users in making complex decisions. Built with Next.js, TypeScript, and Supabase, leveraging OpenAI API for core logic.",
+      status: "Completed",
+      technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "OpenAI API", "Vercel"],
+      link: "#", // Replace with actual link
+      linkText: "Visit Decidoodle",
+      isMajor: true,
     },
     {
+      id: "pe-independent-dev",
+      date: "Jan 2025",
+      type: "milestone",
+      title: "Transition to Independent Developer & Entrepreneur",
+      description: "Embarked on a new journey as a full-time independent developer and entrepreneur. Focusing on building innovative web applications and exploring emerging AI and web technologies.",
+      status: "Completed",
+    },
+    // The original data for "Independent Developer & Entrepreneur" can be broken down:
+    // {
+    //   id: "pe-productivity-toolkit",
+    //   date: "Early 2025", // Example
+    //   type: "project",
+    //   title: "Developer Productivity Toolkit (Concept)",
+    //   description: "Began development of a productivity toolkit for developers, including browser extensions.",
+    //   status: "Planned",
+    //   technologies: ["Chrome Extensions API", "React", "TypeScript"],
+    // },
+    // {
+    //   id: "pe-oss-contributions",
+    //   date: "Ongoing from Jan 2025",
+    //   type: "oss",
+    //   title: "Open Source Contributions",
+    //   description: "Actively contributing to various open-source projects and sharing knowledge through technical articles.",
+    //   status: "Ongoing",
+    //   technologies: ["Git", "Community Engagement"],
+    //   linkText: "View GitHub Profile",
+    //   link: "https://github.com/yourusername" // Replace
+    // }
+  ].sort((a, b) => { // Sort by date, ensuring "Jan 2025" comes before "Feb 2025"
+    const dateA = new Date(a.date.includes(" ") ? a.date : `${a.date} 1, ${new Date().getFullYear()}`); // Robust date parsing
+    const dateB = new Date(b.date.includes(" ") ? b.date : `${b.date} 1, ${new Date().getFullYear()}`);
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) return 0; // Handle invalid dates gracefully
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  const companyExperiences: CompanyExperienceItem[] = [
+    {
       period: "Oct 2016 - Jan 2025",
-      role: "Advanced Services Engineer",
-      company: "Limelight Networks (Edgio)",
-      description: "Provided technical expertise in content delivery and security solutions, ensuring optimal performance for clients.",
+      role: "Senior Solution Engineer / Advanced Services Engineer", // Combined roles for brevity
+      company: "Edgio (formerly Limelight Networks)",
+      description: "Played a key role in bridging the gap between technical solutions and customer needs in the CDN and security space. Provided advanced technical expertise, led pre-sales engineering efforts, and ensured customer success through PoCs and complex issue resolution.",
       achievements: [
-        "Executed successful proof of concepts for enterprise clients",
-        "Resolved complex technical issues in production environments",
-        "Contributed to the evolution of CDN and security solutions",
+        "Led technical presentations and product demonstrations for Fortune 500 clients, translating complex solutions into tangible business value.",
+        "Designed and executed successful Proof of Concepts (PoCs) for enterprise customers, leading to significant contract wins.",
+        "Collaborated closely with sales, product, and engineering teams to define customer requirements and shape product strategy.",
+        "Provided expert-level troubleshooting and resolution for complex technical issues in large-scale production environments.",
+        "Authored technical documentation and internal knowledge base articles for CDN and security solutions."
       ],
-      tech: ["Networking", "Troubleshooting", "POC Execution", "System Architecture"],
+      tech: ["CDN", "WAF", "Bot Management", "DDoS Mitigation", "Cloud Security", "Pre-sales Engineering", "Technical Consulting", "Networking", "Linux", "Scripting (Python, Bash)"],
     },
     {
       period: "2007 - 2016",
-      role: "Software Engineering Roles",
-      company: "Various Companies",
-      description: "Built a strong foundation in software engineering across embedded systems, Linux kernel development, and system programming.",
+      role: "Software Engineering Roles (Embedded, Kernel, Systems)",
+      company: "Various Companies (e.g., [Previous Company Name if notable])",
+      description: "Built a strong foundation in software engineering across diverse domains including embedded systems, Linux kernel development, and system-level programming. Contributed to all phases of the software development lifecycle.",
       achievements: [
-        "Developed Linux system software and device drivers",
-        "Led technical projects and mentored junior engineers",
-        "Gained deep expertise in low-level programming and system architecture",
+        "Developed and maintained Linux device drivers and kernel modules for custom hardware.",
+        "Designed and implemented real-time embedded software for industrial control systems.",
+        "Led small technical projects, mentored junior engineers, and contributed to system architecture design.",
+        "Gained deep expertise in C/C++, low-level debugging, and performance optimization.",
       ],
-      tech: ["C/C++", "Linux Kernel", "Embedded Systems", "System Architecture"],
+      tech: ["C", "C++", "Linux Kernel Development", "Device Drivers", "Embedded Systems", "RTOS", "System Architecture", "GDB", "Assembly"],
     },
   ];
 
   return (
-    <section ref={ref} className="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+    <section ref={ref} id="experience" className="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-24 scroll-mt-20">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
-          Building Experience
+        <h2 className="section-heading mb-4">
+          My Journey & Work
         </h2>
-        <div className="w-20 h-1 mt-4 mb-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto"></div>
+        <p className="section-subheading">
+          A timeline of my professional experience, projects, and milestones.
+        </p>
+        <div className="w-20 h-1 mt-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto"></div>
       </div>
 
       <div className="relative">
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-700" aria-hidden="true" />
+        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-700 -z-10" aria-hidden="true" />
 
-        <div className="mt-8">
-          {experiences.map((exp, index) => (
+        <div className="mt-8 space-y-2"> {/* Added space-y-2 for slight overall spacing */}
+          {projectEventTimeline.map((item, index) => (
+            <ProjectEventCard
+              key={item.id}
+              item={item}
+              isLatest={index === 0}
+            />
+          ))}
+
+          {projectEventTimeline.length > 0 && companyExperiences.length > 0 && (
+            <div className="relative pl-16 pt-8 pb-4 my-6"> {/* Added padding top and bottom */}
+                <div className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 -translate-x-1/2 rounded-full bg-neutral-300 dark:bg-neutral-600 ring-4 ring-white dark:ring-neutral-900" />
+                <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 tracking-tight">
+                    Past Roles
+                </h3>
+            </div>
+          )}
+
+          {companyExperiences.map((exp, index) => (
             <ExperienceCard
-              key={index}
+              key={exp.company + exp.role} // More stable key
               exp={exp}
               index={index}
-              isExpanded={expandedItems.includes(index)}
-              toggleExpand={toggleExpand}
+              isExpanded={expandedCompanyItems.includes(index)}
+              toggleExpand={toggleCompanyExpand}
             />
           ))}
         </div>

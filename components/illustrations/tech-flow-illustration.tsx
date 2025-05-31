@@ -47,8 +47,9 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
         }
 
         const node = document.createElement("div")
-        node.className = "absolute top-1/2 left-0 transform -translate-y-1/2 flex flex-col items-center"
+        node.className = "absolute left-0 flex flex-col items-center"
         node.style.left = `${position}%`
+        node.style.top = "30%" // Position higher up in the container
 
         const iconCircle = document.createElement("div")
         iconCircle.className =
@@ -110,32 +111,54 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
         }
       })
 
-      // Create flowing dots
+      // Create flowing dots from each technology
       if (animate) {
-        for (let i = 0; i < 5; i++) {
+        technologies.forEach((tech, techIndex) => {
+          // Calculate position with the same logic as the tech nodes
+          const padding = window.innerWidth < 768 ? 14 : 10 // Increased padding to shift content left
+          const range = 100 - (padding * 2)
+          const position = padding + (techIndex / (technologies.length - 1)) * range
+          
+          // Create dots for this technology
+          // Add a small offset to center the origin on the icon
+          const iconCenterOffset = 1.2 // Adjusted to move origin left
+          const centeredPosition = position + iconCenterOffset
+          
+          for (let i = 0; i < 3; i++) {
+            // Create dot moving to the right
+            createDot(container, centeredPosition, 'right', i * 0.8, techIndex * 0.3)
+            
+            // Create dot moving to the left
+            createDot(container, centeredPosition, 'left', i * 0.8, techIndex * 0.3)
+          }
+        })
+        
+        // Helper function to create a single dot
+        function createDot(container: HTMLElement, originPosition: number, direction: 'left' | 'right', delay: number, techDelay: number) {
           const dot = document.createElement("div")
-          dot.className =
-            "absolute top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-neutral-400/80 dark:bg-neutral-500/80"
-          dot.style.left = "-10px"
-          dot.style.animationDelay = `${i * 1}s`
-
-          // Create animation
+          dot.className = "absolute top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-neutral-400/80 dark:bg-neutral-500/80"
+          
+          // Start and end positions based on direction
+          const travelDistance = 15 // Distance to travel in %
+          const startPos = originPosition
+          const endPos = direction === 'right' 
+            ? startPos + travelDistance 
+            : startPos - travelDistance
+          
+          // Animation keyframes
           const keyframes = [
-            { left: "-10px", opacity: 0 },
-            { left: "10%", opacity: 1 },
-            { left: "30%", opacity: 1 },
-            { left: "50%", opacity: 1 },
-            { left: "70%", opacity: 1 },
-            { left: "90%", opacity: 1 },
-            { left: "110%", opacity: 0 },
+            { left: `${startPos}%`, opacity: 1 },
+            { left: `${endPos}%`, opacity: 0 },
           ]
-
-          dot.animate(keyframes, {
-            duration: 5000,
+          
+          // Create and start animation
+          const animation = dot.animate(keyframes, {
+            duration: 3500, // Slower animation (3.5 seconds)
             iterations: Number.POSITIVE_INFINITY,
-            delay: i * 1000,
+            delay: (delay * 1000) + (techDelay * 1000),
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           })
-
+          
           container.appendChild(dot)
         }
       }

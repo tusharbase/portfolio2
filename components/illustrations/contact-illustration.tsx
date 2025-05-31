@@ -70,5 +70,5 @@ export function ContactIllustration() {
     }
   }, [])
 
-  return <div ref={containerRef} className="w-full h-full relative" />
+  return <div ref={containerRef} className="w-full h-full relative" suppressHydrationWarning />
 }

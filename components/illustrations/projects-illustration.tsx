@@ -74,5 +74,5 @@ export function ProjectsIllustration({ animate = false }: ProjectsIllustrationPr
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-full relative" />
+  return <div ref={containerRef} className="w-full h-full relative" suppressHydrationWarning />
 }

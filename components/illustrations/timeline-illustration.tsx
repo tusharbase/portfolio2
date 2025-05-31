@@ -120,5 +120,5 @@ export function TimelineIllustration({ animate = false }: TimelineIllustrationPr
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-full relative" />
+  return <div ref={containerRef} className="w-full h-full relative" suppressHydrationWarning />
 }

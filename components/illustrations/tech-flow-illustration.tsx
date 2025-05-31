@@ -174,5 +174,5 @@ export function TechFlowIllustration({ animate = false }: TechFlowIllustrationPr
     }
   }, [animate])
 
-  return <div ref={containerRef} className="w-full h-32 md:h-40 relative overflow-visible" />
+  return <div ref={containerRef} className="w-full h-32 md:h-40 relative overflow-visible" suppressHydrationWarning />
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -16,7 +16,6 @@ const navItems = [
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +56,17 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
+            {/* Mobile: Only show Twitter and LinkedIn */}
+            <div className="flex items-center space-x-4 md:hidden">
+              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
+                <Twitter className="w-5 h-5" />
+              </Link>
+              <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-5 h-5" />
+              </Link>
+            </div>
+
+            {/* Desktop: Show all icons */}
             <div className="hidden md:flex items-center space-x-4">
               <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                 <Github className="w-5 h-5" />
@@ -71,50 +81,10 @@ export default function Header() {
                 <Mail className="w-5 h-5" />
               </Link>
             </div>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="flex space-x-4 mt-4">
-                <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
-                  <Github className="w-5 h-5" />
-                </Link>
-                <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
-                  <Twitter className="w-5 h-5" />
-                </Link>
-                <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
-                  <Linkedin className="w-5 h-5" />
-                </Link>
-                <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
-                  <Mail className="w-5 h-5" />
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
+        {/* Mobile Navigation - Removed */}
       </div>
     </header>
   )

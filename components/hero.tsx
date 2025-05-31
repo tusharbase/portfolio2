@@ -1,24 +1,13 @@
 "use client"
 
-import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { CodeIllustration } from "@/components/illustrations/code-illustration"
 
 export default function Hero() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    const aboutSection = document.getElementById("about")
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
     <section
       id="home"
-      ref={scrollRef}
       className="relative min-h-screen flex items-center justify-center pt-20 pb-16 overflow-hidden"
     >
       <div className="absolute inset-0 dot-pattern"></div>
@@ -56,18 +45,14 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Illustration */}
-          <div className="relative h-[400px] lg:h-[500px] illustration-container">
+          {/* Illustration - Hidden on mobile */}
+          <div className="hidden lg:block relative h-[400px] lg:h-[500px] illustration-container">
             <CodeIllustration />
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator" onClick={handleScroll}>
-        <div className="mouse"></div>
-        <div className="mt-2 text-xs font-medium">Scroll</div>
-      </div>
+
     </section>
   )
 }

@@ -59,9 +59,6 @@ export default function Hero() {
                 View My Work
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button size="lg" variant="outline">
-                Download Resume
-              </Button>
             </div>
           </div>
 

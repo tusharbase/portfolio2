@@ -15,8 +15,8 @@ export default function Technologies() {
       category: "Onchain",
       items: [
         { name: "Coinbase SDK", description: "Payment & trading integration" },
-        { name: "Base Layer 2", description: "Ethereum scaling solutions" },
-        { name: "USDC Integration", description: "Stablecoin implementation" },
+        { name: "Base Layer2", description: "Ethereum scaling solutions" },
+        { name: "USDC Payments", description: "Digital dollar payments" },
         { name: "Smart Contracts", description: "Solidity development" },
       ],
     },
@@ -25,8 +25,8 @@ export default function Technologies() {
       items: [
         { name: "AI Agents", description: "Autonomous systems development" },
         { name: "Cursor", description: "AI-powered code editor" },
-        { name: "Windsurf", description: "AI development assistant" },
-        { name: "v0 by Vercel", description: "AI UI generation" },
+        { name: "AI SDK", description: "AI Integration" },
+        { name: "V0", description: "AI UI/UX generation" },
       ],
     },
     {

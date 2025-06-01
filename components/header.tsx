@@ -60,7 +60,7 @@ export default function Header() {
               className="ml-2"
               onClick={() => setContactOpen(true)}
             >
-              Contact Me
+              Let's Build!
             </Button>
           </nav>
 

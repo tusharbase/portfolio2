@@ -337,15 +337,7 @@ export default function Experience() {
       link: "#", // Replace with actual link
       linkText: "Visit Decidoodle",
       isMajor: true,
-    },
-    {
-      id: "pe-independent-dev",
-      date: "Jan 2025",
-      type: "milestone" as const,
-      title: "Transition to Independent Learner & Builder",
-      description: "Embarked on a new journey as a full-time independent learner and builder. Focusing on building web applications and exploring emerging AI technologies and digital assets.",
-      status: "Ongoing" as const,
-    },
+    }
   ] as const satisfies readonly ProjectEventItem[];
 
   const sortedProjectEventTimeline = [...projectEventTimeline].sort((a, b) => { // Sort by date, ensuring "Jan 2025" comes before "Feb 2025"
@@ -354,36 +346,6 @@ export default function Experience() {
     if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) return 0; // Handle invalid dates gracefully
     return dateB.getTime() - dateA.getTime();
   });
-
-  // Use the sorted timeline
-  const companyExperiences: CompanyExperienceItem[] = [
-    {
-      period: "Oct 2016 - Jan 2025",
-      role: "Senior Solution Engineer", // Combined roles for brevity
-      company: "Edgio (formerly Limelight Networks)",
-      description: "Bridged technical solutions and customer needs in CDN/security, leading pre-sales engineering and ensuring customer success through PoCs and issue resolution.",
-      achievements: [
-        "Delivered technical presentations and product demos to Fortune 500 clients, driving business value",
-        "Executed successful PoCs that secured major enterprise contracts",
-        "Aligned cross-functional teams on customer requirements and product strategy",
-        "Resolved complex technical issues in large-scale production environments",
-        "Created comprehensive technical documentation for CDN and security solutions"
-      ],
-      tech: ["CDN", "WAF", "Bot Management", "DDoS Mitigation", "Cloud Security", "Pre-sales Engineering", "Technical Consulting"],
-    },
-    {
-      period: "2007 - 2016",
-      role: "Software Engineering Roles (Embedded, Linux Kernel, TCP/IP Stack)",
-      company: "Various Companies",
-      description: "Bridged technical solutions and customer needs in CDN/security, leading pre-sales engineering and ensuring customer success through PoCs and issue resolution.",      achievements: [
-        "Developed Linux device drivers and kernel modules for custom hardware",
-        "Built real-time embedded software for industrial control systems",
-        "Led technical projects and mentored junior engineers",
-        "Optimized system performance through low-level debugging"
-      ],
-      tech: ["C", "C++", "Linux Kernel Development", "Network Device Drivers", "Embedded Systems", "System Architecture"],
-    },
-  ];
 
   return (
     <section ref={ref} id="experience" className="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-24 scroll-mt-20">
@@ -406,25 +368,6 @@ export default function Experience() {
               key={item.id}
               item={item}
               isLatest={index === 0}
-            />
-          ))}
-
-          {projectEventTimeline.length > 0 && companyExperiences.length > 0 && (
-            <div className="relative pl-16 pt-8 pb-4 my-6"> {/* Added padding top and bottom */}
-                <div className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 -translate-x-1/2 rounded-full bg-neutral-300 dark:bg-neutral-600 ring-4 ring-white dark:ring-neutral-900" />
-                <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 tracking-tight">
-                    Past Roles
-                </h3>
-            </div>
-          )}
-
-          {companyExperiences.map((exp, index) => (
-            <ExperienceCard
-              key={exp.company + exp.role} // More stable key
-              exp={exp}
-              index={index}
-              isExpanded={expandedCompanyItems.includes(index)}
-              toggleExpand={toggleCompanyExpand}
             />
           ))}
         </div>

@@ -29,7 +29,7 @@ export function ProfileIllustration() {
       // Skill bubbles
       const skills = [
         { name: "Onchain", position: "top-10 left-10" },
-        { name: "AI", position: "top-10 right-10" },
+        { name: "LLMs", position: "top-10 right-10" },
         { name: "Webapps", position: "bottom-10 left-10" },
         { name: "Vibe Coding", position: "bottom-10 right-10" },
       ]

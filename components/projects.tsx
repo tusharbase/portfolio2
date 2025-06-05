@@ -20,15 +20,15 @@ export default function Projects() {
       description:
         "AI-copilot for decision making.",
       image: "/desidoodle.png",
-      tags: ["Next.js"],
+      tags: ["Next.js", "AI", "Vercel", "Supabase"],
       link: "https://decidoodle.vercel.app",
     },
     {
       title: "Zero Now",
       description:
-        "Intelligent trading system powered by AI agents that analyzes market patterns and executes optimal strategies.",
+        "Fitness/Gym exercise tracker.",
       image: "/zeronow.png",
-      tags: ["AI Agents", "AI"],
+      tags: ["Next.js", "Supabase", "Vercel"],
       link: "https://zero-now.vercel.app",
     },
     {
@@ -36,7 +36,7 @@ export default function Projects() {
       description:
         "Comprehensive analytics dashboard for onchain data with real-time monitoring and predictive insights.",
       image: "/aicodeflow.png",
-      tags: ["Next.js", "Supabase", "AI"],
+      tags: ["Next.js", "Supabase", "AI", "Vercel"],
       link: "https://aicodeflow0.vercel.app",
     },
     {
@@ -44,7 +44,7 @@ export default function Projects() {
       description:
         "PDF transformation and AI analysis tool.",
       image: "/primepdf.png",
-      tags: ["Next.js", "Supabase", "AI"],
+      tags: ["Next.js", "Supabase", "AI", "Vercel"],
       link: "https://primepdf.vercel.app",
     },
   ]

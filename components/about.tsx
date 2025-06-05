@@ -36,9 +36,7 @@ export default function About() {
 
               <div className="space-y-6 text-neutral-600 dark:text-neutral-400">
                 <p className="text-lg">
-                  I'm a developer and tech innovator with expertise in cutting-edge technologies. With a passion for
-                  creating elegant solutions to complex problems, I specialize in onchain development, AI
-                  integration, and modern web applications.
+                  Full-time independent learner and builder. Focusing on building web applications and exploring emerging AI technologies and digital assets.
                 </p>
 
                 <p>

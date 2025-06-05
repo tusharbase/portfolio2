@@ -19,7 +19,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Tushar Mehta | Developer & Tech Innovator",
   description: "Building the future with cutting-edge onchain, AI, and web technologies",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({

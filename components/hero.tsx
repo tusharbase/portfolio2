@@ -28,23 +28,22 @@ export default function Hero() {
       id="home"
       ref={scrollRef}
       className="relative min-h-screen flex items-center justify-center pt-20 pb-16 isolate"
-      // `isolate` creates a new stacking context, useful for z-index management.
-      // The Hero section itself should NOT have overflow-hidden for this effect.
+      // `isolate` creates a new stacking context. Hero section itself should not have overflow-hidden.
     >
-      {/* Dot pattern background layer - z-0 places it at the bottom of the stacking context */}
+      {/* Dot pattern background layer - z-0 */}
       <div className="absolute inset-0 dot-pattern z-0"></div>
 
-      {/* Particle Illustration Clipping Container */}
-      {/* This container scrolls with the Hero section. */}
-      {/* `overflow-hidden` clips the `fixed` CodeIllustration component inside it. */}
-      {/* Positioned absolutely to cover the right 3/5 of the Hero section, full height of Hero. */}
-      {/* `z-[1]` to be above dot-pattern, but below main content (z-10). */}
-      <div className="hidden lg:block absolute top-0 right-0 w-3/5 h-full overflow-hidden z-[1]">
-        {/* CodeIllustration is fixed internally, but will be clipped by this parent */}
+      {/* Particle Illustration Container */}
+      {/* This container is absolute within Hero, takes full height of Hero and 60% width on the right. */}
+      {/* CodeIllustration will fill this container. */}
+      {/* `overflow-hidden` ensures anything from CodeIllustration (if it somehow exceeded) is clipped. */}
+      {/* `pointer-events-none` makes this layer non-interactive if it's purely decorative. */}
+      {/* `z-[1]` places it above dot-pattern but below main content. */}
+      <div className="hidden lg:block absolute top-0 right-0 w-3/5 h-full z-[1] overflow-hidden pointer-events-none">
         <CodeIllustration />
       </div>
 
-      {/* Content Container - needs a higher z-index to be on top of the particle layer */}
+      {/* Content Container - needs a higher z-index (z-10) to be on top of illustration layers */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content Column */}
@@ -78,7 +77,7 @@ export default function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="group" // Keep or modify responsive classes like lg:hidden as needed
+                className="group" // Removed lg:hidden to make it always visible, adjust as needed
                 onClick={() => setContactOpen(true)}
               >
                 Let's Connect!
@@ -87,18 +86,18 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Illustration Placeholder Column (for grid layout consistency) */}
-          {/* This div ensures the text content stays in the first column of the grid.
-              The actual illustration is now an absolutely positioned layer.
-              Its height can influence vertical alignment if `items-center` is used on the grid.
+          {/* Grid Placeholder for the right column */}
+          {/* This empty div ensures the text content on the left stays in the first grid column
+              and doesn't expand to full width. `items-center` on the parent grid will handle
+              vertical alignment.
           */}
-          <div className="hidden lg:block relative h-[400px] lg:h-[500px]">
-            {/* This space is intentionally left empty as CodeIllustration is a background layer. */}
+          <div className="hidden lg:block">
+            {/* This space is effectively where the absolutely positioned illustration resides visually. */}
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Desktop only, ensure it's above particle layer */}
+      {/* Scroll Indicator - Desktop only, ensure it's above particle layer with z-10 */}
       <div className="hidden md:flex flex-col items-center scroll-indicator z-10" onClick={handleScrollToAbout}>
         <div className="mouse"></div>
         <div className="mt-2 text-xs font-medium">Scroll</div>

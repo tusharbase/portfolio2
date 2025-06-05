@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
 import { CodeIllustration } from "@/components/illustrations/code-illustration"
 import { ContactDialog } from "@/components/contact-dialog"
 
@@ -52,14 +51,13 @@ export default function Hero() {
                 size="lg" 
                 className="group"
                 onClick={() => {
-                  const experienceSection = document.getElementById("experience");
+                  const experienceSection = document.getElementById("projects");
                   if (experienceSection) {
                     experienceSection.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >
                 View My Work
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 
                 size="lg" 
@@ -67,8 +65,7 @@ export default function Hero() {
                 className="group lg:hidden"
                 onClick={() => setContactOpen(true)}
               >
-                Let's Build
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Let's Connect!
               </Button>
               <ContactDialog open={contactOpen} onOpenChange={setContactOpen} />
             </div>

@@ -1,12 +1,14 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { CodeIllustration } from "@/components/illustrations/code-illustration"
+import { ContactDialog } from "@/components/contact-dialog"
 
 export default function Hero() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [contactOpen, setContactOpen] = useState(false)
 
   const handleScroll = () => {
     const aboutSection = document.getElementById("about")
@@ -59,6 +61,16 @@ export default function Hero() {
                 View My Work
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="group lg:hidden"
+                onClick={() => setContactOpen(true)}
+              >
+                Let's Build
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <ContactDialog open={contactOpen} onOpenChange={setContactOpen} />
             </div>
           </div>
 

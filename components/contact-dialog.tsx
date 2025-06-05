@@ -92,6 +92,9 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
               id="email"
               name="email"
               type="email"
+              inputMode="email"
+              autoCapitalize="none"
+              autoComplete="email"
               placeholder="your@email.com"
               value={formData.email}
               onChange={handleChange}
@@ -116,7 +119,7 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
             />
           </div>
 
-          <div className="flex justify-end space-x-2 pt-2">
+          <div className="flex justify-end gap-2 pt-2">
             <Button
               type="button"
               variant="outline"
@@ -125,7 +128,10 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={state.submitting}>
+            <Button 
+              type="submit" 
+              disabled={state.submitting}
+            >
               {state.submitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

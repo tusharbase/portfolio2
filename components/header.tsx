@@ -66,6 +66,9 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             {/* Mobile: Only show Twitter and LinkedIn */}
             <div className="flex items-center space-x-4 md:hidden">
+              <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
+                <Github className="w-5 h-5" />
+              </Link>
               <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
                 <Twitter className="w-5 h-5" />
               </Link>

@@ -12,12 +12,16 @@ export function CodeIllustration() {
     if (!canvas) return
 
     // Set canvas dimensions
+    let scrollY = window.scrollY
+    
+    const handleScroll = () => {
+      scrollY = window.scrollY
+    }
+    
     const resizeCanvas = () => {
-      const container = canvas.parentElement
-      if (container) {
-        canvas.width = container.clientWidth
-        canvas.height = container.clientHeight
-      }
+      // Take up 60% of the viewport width, positioned to the right
+      canvas.width = window.innerWidth * 0.6
+      canvas.height = window.innerHeight
     }
 
     resizeCanvas()
@@ -113,17 +117,19 @@ export function CodeIllustration() {
         ctx.font = `${particle.size}px monospace`
         ctx.fillStyle = particle.color
         ctx.globalAlpha = particle.opacity
-        ctx.fillText(particle.text, particle.x, particle.y)
+        
+        // Adjust particle position based on scroll
+        const yPos = particle.y - scrollY % (canvas.height + 100)
+        
+        // Only draw particles that are in the viewport
+        if (yPos > -50 && yPos < canvas.height + 50) {
+          ctx.fillText(particle.text, particle.x, yPos)
+        }
+        
         ctx.globalAlpha = 1
 
-        // Move particles
-        particle.y += particle.speed
-
-        // Reset particles that go off screen
-        if (particle.y > canvas.height + 50) {
-          particle.y = -50
-          particle.x = Math.random() * canvas.width
-        }
+        // Move particles (relative to scroll position)
+        particle.y = (particle.y + particle.speed) % (canvas.height + 100)
       })
 
       animationRef.current = requestAnimationFrame(animate)
@@ -131,11 +137,19 @@ export function CodeIllustration() {
 
     animate()
 
+    window.addEventListener("resize", resizeCanvas)
+    window.addEventListener("scroll", handleScroll)
+
     return () => {
       window.removeEventListener("resize", resizeCanvas)
+      window.removeEventListener("scroll", handleScroll)
       cancelAnimationFrame(animationRef.current)
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="w-full h-full" />
+  return (
+    <div className="fixed inset-0 left-auto right-0 w-3/5 h-screen overflow-hidden">
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </div>
+  )
 }

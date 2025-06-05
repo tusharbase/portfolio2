@@ -2,8 +2,7 @@
 
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
-import { Button } from "@/components/ui/button"
-import { ArrowUpRight, ChevronDown, ExternalLink } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 
 interface ProjectCardProps {

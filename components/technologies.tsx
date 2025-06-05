@@ -115,13 +115,21 @@ export default function Technologies() {
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <div className="relative w-32 h-20 flex items-center justify-center mb-3">
-        <Image
-          src={getLogoPath(tech)}
-          alt={tech.name}
-          fill
-          className="object-contain"
-          sizes="(max-width: 768px) 128px, 160px"
-        />
+        {tech.name === "AI SDK" ? (
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <span className="font-bold text-2xl sm:text-2xl text-center bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              {tech.name}
+            </span>
+          </div>
+        ) : (
+          <Image
+            src={getLogoPath(tech)}
+            alt={tech.name}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 128px, 160px"
+          />
+        )}
       </div>
       <p className="text-sm text-center text-neutral-600 dark:text-neutral-400 mt-1">
         {tech.description}

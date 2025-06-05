@@ -25,19 +25,32 @@ const ProjectCard = ({
   isExpanded: boolean, 
   onToggle: () => void 
 }) => (
-  <div className="relative group h-full flex flex-col rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-    <div className="relative aspect-video overflow-hidden">
+  <a 
+    href={project.link} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="relative group h-full flex flex-col rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:ring-2 hover:ring-neutral-300 dark:hover:ring-neutral-600"
+    onClick={(e) => {
+      // Prevent the click from bubbling up to parent elements
+      e.stopPropagation();
+    }}
+  >
+    <div className={`relative aspect-video w-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden ${project.title === 'Zero Now' ? 'pt-4' : ''}`}>
       <Image
         src={project.image || "/placeholder.svg"}
         alt={project.title}
         fill
-        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        className={`object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === 'Zero Now' ? 'object-top' : 'object-center'}`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        style={{ objectFit: 'cover' }}
       />
     </div>
     
     <div className="p-6 flex flex-col flex-1">
-      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{project.title}</h3>
+      <div className="flex justify-between items-start">
+        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{project.title}</h3>
+        <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 mt-1 transition-colors" />
+      </div>
       
       <p className="text-neutral-600 dark:text-neutral-400 mb-4">
         {project.description}
@@ -53,7 +66,7 @@ const ProjectCard = ({
         </div>
       </div>
     </div>
-  </div>
+  </a>
 )
 
 export default function Projects() {
@@ -112,7 +125,7 @@ export default function Projects() {
       description: "Transform and analyze PDF documents with AI-powered tools.",
       longDescription: "PrimePDF is a powerful tool for working with PDF documents. It offers advanced features for transforming, editing, and analyzing PDFs using AI to extract valuable information and automate document workflows.",
       image: "/primepdf.png",
-      tags: ["Next.js", "Supabase", "AI", "Vercel"],
+      tags: ["Next.js", "Supabase", "AI", "Vercel", "Coinbase", "USDC"],
       link: "https://primepdf.vercel.app",
       features: [
         "PDF to text/image conversion",
@@ -131,11 +144,11 @@ export default function Projects() {
     <section id="projects" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+          <h2 className="section-heading gradient-text">
             My Projects
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+          <div className="w-20 h-1 rounded-full mx-auto mb-6 accent-gradient"></div>
+          <p className="section-subheading">
             A collection of my latest projects showcasing my skills in web development, AI, and modern technologies.
           </p>
         </div>

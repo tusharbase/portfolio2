@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin, Mail, MessageCircle } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 import { ContactDialog } from "@/components/contact-dialog"
 
 const navItems = [
@@ -11,7 +11,6 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Technologies", href: "#technologies" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" }
 ]
 
 export default function Header() {

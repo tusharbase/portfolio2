@@ -141,8 +141,8 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+      <div className="max-w-[2000px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+        <div className="text-center mb-16 max-w-5xl mx-auto">
           <h2 className="section-heading gradient-text">
             My Projects
           </h2>
@@ -154,7 +154,7 @@ export default function Projects() {
 
         <div ref={ref} className="relative">
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
             {projectsData.map((project, index) => (
               <ProjectCard 
                 key={project.title}

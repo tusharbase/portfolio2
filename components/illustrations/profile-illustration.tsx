@@ -14,7 +14,7 @@ export function ProfileIllustration() {
       // Logo container
       const logoContainer = document.createElement("div")
       logoContainer.className =
-        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center bg-transparent"
+        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[28.16rem] h-[28.16rem] md:w-[28.16rem] md:h-[28.16rem] lg:w-[35.2rem] lg:h-[35.2rem] flex items-center justify-center bg-transparent"
       
       const logoImg = document.createElement("img")
       logoImg.src = "/dance.png"

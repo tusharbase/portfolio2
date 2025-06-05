@@ -14,13 +14,12 @@ export function ProfileIllustration() {
       // Logo container
       const logoContainer = document.createElement("div")
       logoContainer.className =
-        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 flex items-center justify-center bg-transparent"
+        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center bg-transparent"
       
       const logoImg = document.createElement("img")
       logoImg.src = "/dance.png"
       logoImg.alt = "Profile Logo"
-      logoImg.className = "w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal"
-      logoImg.style.webkitUserDrag = 'none'
+      logoImg.className = "w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal transform hover:scale-105 transition-transform duration-300"
       logoImg.style.userSelect = 'none'
       logoImg.draggable = false
       logoContainer.appendChild(logoImg)
@@ -80,5 +79,5 @@ export function ProfileIllustration() {
     }
   }, [])
 
-  return <div ref={containerRef} className="w-full h-full relative" suppressHydrationWarning />
+  return <div ref={containerRef} className="w-full h-full min-h-[500px] relative" suppressHydrationWarning />
 }

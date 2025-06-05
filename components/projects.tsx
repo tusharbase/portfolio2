@@ -124,7 +124,7 @@ export default function Projects() {
       description: "Transform and analyze PDF documents with AI-powered tools.",
       longDescription: "PrimePDF is a powerful tool for working with PDF documents. It offers advanced features for transforming, editing, and analyzing PDFs using AI to extract valuable information and automate document workflows.",
       image: "/primepdf.png",
-      tags: ["Next.js", "Supabase", "AI", "Vercel", "Coinbase", "USDC"],
+      tags: ["Next.js", "Supabase", "AI SDK", "Vercel", "Coinbase", "USDC"],
       link: "https://primepdf.vercel.app",
       features: [
         "PDF to text/image conversion",

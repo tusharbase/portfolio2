@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { Github, Mail } from "lucide-react"
+import Image from "next/image"
 import { ContactDialog } from "@/components/contact-dialog"
 
 const navItems = [
@@ -64,13 +65,16 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            {/* Mobile: Only show Twitter and LinkedIn */}
+            {/* Mobile: Only show GitHub and X/Twitter */}
             <div className="flex items-center space-x-4 md:hidden">
               <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                 <Github className="w-5 h-5" />
               </Link>
-              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
-                <Twitter className="w-5 h-5" />
+              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="X (Twitter)">
+                <Image src="/x-logo.png" alt="X (Twitter)" width={20} height={20} className="w-5 h-5" />
+              </Link>
+              <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
+                <Mail className="w-5 h-5" />
               </Link>
             </div>
 
@@ -79,8 +83,8 @@ export default function Header() {
               <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                 <Github className="w-5 h-5" />
               </Link>
-              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
-                <Twitter className="w-5 h-5" />
+              <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="X (Twitter)">
+                <Image src="/x-logo.png" alt="X (Twitter)" width={20} height={20} className="w-5 h-5" />
               </Link>
               <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />

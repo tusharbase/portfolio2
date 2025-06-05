@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Github, Mail } from "lucide-react"
-import Image from "next/image"
 import { ContactDialog } from "@/components/contact-dialog"
+import { useActiveSection } from "@/hooks/use-active-section" // 1. Import the new hook
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -14,9 +15,15 @@ const navItems = [
   { name: "Technologies", href: "#technologies" },
 ]
 
+// Extract just the IDs for the hook
+const sectionIds = navItems.map(item => item.href.substring(1));
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
+  
+  // 2. Use the hook to get the current active section
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +56,10 @@ export default function Header() {
                 className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors relative group"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-neutral-900 dark:bg-neutral-100 transition-all duration-300 group-hover:w-full"></span>
+                {/* 3. Conditionally render the active underline */}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-neutral-900 dark:bg-neutral-100 transition-all duration-300 group-hover:w-full ${
+                  activeSection === item.href.substring(1) ? 'w-full' : 'w-0'
+                }`}></span>
               </Link>
             ))}
             <Button 
@@ -63,7 +73,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            {/* Mobile: Only show GitHub and X/Twitter */}
+            {/* Mobile: You should add a Sheet/Drawer menu here for these */}
             <div className="flex items-center space-x-4 md:hidden">
               <Link href="https://github.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="GitHub">
                 <Github className="w-5 h-5" />
@@ -91,8 +101,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-        {/* Mobile Navigation - Removed */}
       </div>
     </header>
   )

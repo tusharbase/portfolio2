@@ -95,14 +95,14 @@ const ProjectDetailDialog = ({
 
           <DialogFooter className="sticky bottom-0 bg-background/80 backdrop-blur-sm p-6 border-t mt-6">
             <div className="flex w-full justify-end gap-3">
-              {project.githubLink && (
+              {/* {project.githubLink && (
                  <Button variant="outline" asChild>
                   <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                     <Github className="mr-2 h-4 w-4" />
                     View Code
                   </a>
                 </Button>
-              )}
+              )} */}
               <Button asChild>
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
                   View Live Site
@@ -164,6 +164,21 @@ export default function Projects() {
 
   const projectsData: ProjectCardProps[] = [
     {
+      title: "PrimePDF",
+      description: "Transform and analyze your PDF documents with powerful AI-powered tools.",
+      longDescription: "PrimePDF is a powerful tool for interacting with PDF documents. It leverages the Vercel AI SDK to enable conversational analysis, allowing users to 'chat' with their documents. It also integrates Coinbase Commerce for processing payments with USDC, showcasing a full-stack, AI-driven, on-chain application.",
+      image: "/primepdf.png",
+      tags: ["Next.js", "AI SDK", "Vercel", "Coinbase", "USDC"],
+      link: "https://primepdf.vercel.app",
+      githubLink: "https://github.com/tusharbase/prime-pdf",
+      features: [
+        "Conversational PDF analysis using the Vercel AI SDK.",
+        "Secure PDF uploads and processing.",
+        "On-chain payment integration with Coinbase Commerce.",
+        "Streamed responses for a real-time chat experience.",
+      ],
+    },
+    {
       title: "Decidoodle",
       description: "An AI-powered decision-making assistant to help you make better, data-driven choices.",
       longDescription: "Decidoodle is an AI copilot designed to demystify complex decisions. By allowing users to define options and criteria, it leverages machine learning models to analyze inputs, weigh factors, and provide clear, actionable recommendations. The goal was to create an intuitive tool that moves beyond simple pros-and-cons lists into intelligent, personalized guidance.",
@@ -206,21 +221,6 @@ export default function Projects() {
         "Predictive analytics for trend forecasting.",
         "Smart contract interaction and event monitoring.",
         "User-friendly interface for non-technical users.",
-      ],
-    },
-    {
-      title: "PrimePDF",
-      description: "Transform and analyze your PDF documents with powerful AI-powered tools.",
-      longDescription: "PrimePDF is a powerful tool for interacting with PDF documents. It leverages the Vercel AI SDK to enable conversational analysis, allowing users to 'chat' with their documents. It also integrates Coinbase Commerce for processing payments with USDC, showcasing a full-stack, AI-driven, on-chain application.",
-      image: "/primepdf.png",
-      tags: ["Next.js", "AI SDK", "Vercel", "Coinbase", "USDC"],
-      link: "https://primepdf.vercel.app",
-      githubLink: "https://github.com/tusharbase/prime-pdf",
-      features: [
-        "Conversational PDF analysis using the Vercel AI SDK.",
-        "Secure PDF uploads and processing.",
-        "On-chain payment integration with Coinbase Commerce.",
-        "Streamed responses for a real-time chat experience.",
       ],
     },
   ]

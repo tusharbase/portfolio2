@@ -35,9 +35,7 @@ export default function Header() {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           <Link href="#home" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center text-neutral-100 dark:text-neutral-900 font-bold text-lg">
-              T
-            </div>
+            <Image src="/logo.svg" alt="Logo" width={32} height={32} className="w-8 h-8" />
             <span className="text-lg font-medium">tushar.base.eth</span>
           </Link>
 

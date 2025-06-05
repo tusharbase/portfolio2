@@ -27,25 +27,25 @@ export default function Technologies() {
       name: "Next.js", 
       logoLight: "/Next.js_wordmark_light.svg", 
       category: "Web Development",
-      description: "React framework" 
+      description: "Frontend Framework" 
     },
     { 
       name: "Vercel", 
       logoLight: "/Vercel_wordmark_light.svg", 
       category: "Web Development",
-      description: "Deployment platform" 
+      description: "Deployment Platform" 
     },
     { 
       name: "Supabase", 
       logoLight: "/Supabase_wordmark_light.svg", 
       category: "Web Development",
-      description: "Database & auth" 
+      description: "Database & Auth" 
     },
     { 
-      name: "Tailwind", 
+      name: "AI SDK", 
       logoLight: "/Tailwind CSS_wordmark_light.svg", 
       category: "Web Development",
-      description: "Utility-first CSS" 
+      description: "AI Integration" 
     },
     
     // AI & ML
@@ -53,49 +53,49 @@ export default function Technologies() {
       name: "V0", 
       logoLight: "/v0_light.svg", 
       category: "AI & ML",
-      description: "AI UI/UX generation" 
+      description: "UI/UX generation" 
     },
     { 
       name: "OpenAI", 
       logoLight: "/OpenAI_wordmark_light.svg", 
       category: "AI & ML",
-      description: "AI models & APIs" 
+      description: "Planning" 
     },
     { 
       name: "Gemini", 
       logoLight: "/gemini_wordmark.svg", 
       category: "AI & ML",
-      description: "Google's AI models" 
+      description: "Architecture & Design" 
     },
     { 
-      name: "Grok", 
-      logoLight: "/Grok_wordmark_light.svg", 
+      name: "Perplexity", 
+      logoLight: "/perplexity.png", 
       category: "AI & ML",
-      description: "AI assistant" 
+      description: "Perplexity Research" 
     },
     
     // Onchain
     { 
       name: "Ethereum", 
-      logoLight: "/ethereum_light.svg", 
+      logoLight: "/ethereum.svg", 
       category: "Onchain",
       description: "Smart contracts" 
     },
     { 
       name: "Base", 
-      logoLight: "/base_light.svg", 
+      logoLight: "/Base_Symbol_Blue.png", 
       category: "Onchain",
-      description: "Ethereum L2" 
+      description: "Base" 
     },
     { 
       name: "USDC", 
-      logoLight: "/usdc_light.svg", 
+      logoLight: "/usdc-logo.png", 
       category: "Onchain",
       description: "Digital dollar" 
     },
     { 
       name: "Coinbase", 
-      logoLight: "/coinbase_light.svg", 
+      logoLight: "/Coinbase_Wordmark.png", 
       category: "Onchain",
       description: "Crypto services" 
     },
@@ -153,9 +153,9 @@ export default function Technologies() {
             <div className="space-y-16">
               {categories.map((category) => (
                 <div key={category} className="space-y-8">
-                  <h3 className="text-2xl font-bold text-center">{category}</h3>
-                  <Card className="overflow-hidden bg-transparent border border-neutral-200/50 dark:border-neutral-800/50">
-                    <CardContent className="p-6 bg-transparent">
+                  {/* <h3 className="text-2xl font-bold text-center">{category}</h3> */}
+                  <Card className="overflow-hidden bg-transparent border-0 shadow-none">
+                    <CardContent className="p-0 bg-transparent">
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         {allLogos
                           .filter(tech => tech.category === category)

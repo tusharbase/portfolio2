@@ -72,9 +72,6 @@ export default function Header() {
               <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
                 <Twitter className="w-5 h-5" />
               </Link>
-              <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
-              </Link>
             </div>
 
             {/* Desktop: Show all icons */}
@@ -84,9 +81,6 @@ export default function Header() {
               </Link>
               <Link href="https://twitter.com/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Twitter">
                 <Twitter className="w-5 h-5" />
-              </Link>
-              <Link href="https://linkedin.com/in/tusharbase" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
               </Link>
               <Link href="mailto:tushar.base.eth@gmail.com" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />

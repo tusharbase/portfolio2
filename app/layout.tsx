@@ -5,6 +5,7 @@ import "./globals.css"
 import Header from "@/components/header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "sonner"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({
               },
             }}
           />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

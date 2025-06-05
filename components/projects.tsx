@@ -1,12 +1,60 @@
 "use client"
 
+import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowUpRight } from "lucide-react"
-import { ProjectsIllustration } from "@/components/illustrations/projects-illustration"
-import { useEffect, useRef } from "react"
+import { ArrowUpRight, ChevronDown, ExternalLink } from "lucide-react"
 import Image from "next/image"
+
+interface ProjectCardProps {
+  title: string
+  description: string
+  longDescription?: string
+  image: string
+  tags: string[]
+  link: string
+  features?: string[]
+}
+
+const ProjectCard = ({ 
+  project, 
+  isExpanded, 
+  onToggle 
+}: { 
+  project: ProjectCardProps, 
+  isExpanded: boolean, 
+  onToggle: () => void 
+}) => (
+  <div className="relative group h-full flex flex-col rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="relative aspect-video overflow-hidden">
+      <Image
+        src={project.image || "/placeholder.svg"}
+        alt={project.title}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
+    
+    <div className="p-6 flex flex-col flex-1">
+      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{project.title}</h3>
+      
+      <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+        {project.description}
+      </p>
+      
+      <div className="mt-auto">
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag, i) => (
+            <span key={i} className="text-xs px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
 export default function Projects() {
   const [ref, inView] = useInView({
@@ -14,159 +62,101 @@ export default function Projects() {
     threshold: 0.1,
   })
 
-  const projectsData = [
+  const [expandedProject, setExpandedProject] = useState<number | null>(null)
+
+  const projectsData: ProjectCardProps[] = [
     {
       title: "Decidoodle",
-      description:
-        "AI-copilot for decision making.",
+      description: "AI-powered decision making assistant that helps you make better choices.",
+      longDescription: "Decidoodle is an AI copilot that helps you make better decisions by analyzing your options and providing data-driven recommendations. It uses machine learning to understand your preferences and suggest the best course of action.",
       image: "/desidoodle.png",
       tags: ["Next.js", "AI", "Vercel", "Supabase"],
       link: "https://decidoodle.vercel.app",
+      features: [
+        "AI-powered decision analysis",
+        "Customizable decision criteria",
+        "Real-time collaboration",
+        "Data visualization"
+      ]
     },
     {
       title: "Zero Now",
-      description:
-        "Fitness/Gym exercise tracker.",
+      description: "Comprehensive fitness tracker for gym enthusiasts and athletes.",
+      longDescription: "Zero Now is a fitness and gym exercise tracker that helps you stay on top of your workout routine, track your progress, and achieve your fitness goals with personalized insights and analytics.",
       image: "/zeronow.png",
       tags: ["Next.js", "Supabase", "Vercel"],
       link: "https://zero-now.vercel.app",
+      features: [
+        "Workout tracking",
+        "Exercise library",
+        "Progress analytics",
+        "Custom workout plans"
+      ]
     },
     {
       title: "AI CodeFlow",
-      description:
-        "Comprehensive analytics dashboard for onchain data with real-time monitoring and predictive insights.",
+      description: "Advanced analytics dashboard for onchain data with real-time insights.",
+      longDescription: "AI CodeFlow provides comprehensive analytics and monitoring for onchain data, offering real-time insights and predictive analytics to help developers and analysts understand blockchain data patterns and trends.",
       image: "/aicodeflow.png",
       tags: ["Next.js", "Supabase", "AI", "Vercel"],
       link: "https://aicodeflow0.vercel.app",
+      features: [
+        "Real-time data visualization",
+        "Custom dashboards",
+        "Predictive analytics",
+        "Smart alerts"
+      ]
     },
     {
       title: "PrimePDF",
-      description:
-        "PDF transformation and AI analysis tool.",
+      description: "Transform and analyze PDF documents with AI-powered tools.",
+      longDescription: "PrimePDF is a powerful tool for working with PDF documents. It offers advanced features for transforming, editing, and analyzing PDFs using AI to extract valuable information and automate document workflows.",
       image: "/primepdf.png",
       tags: ["Next.js", "Supabase", "AI", "Vercel"],
       link: "https://primepdf.vercel.app",
+      features: [
+        "PDF to text/image conversion",
+        "AI-powered analysis",
+        "Document editing",
+        "Batch processing"
+      ]
     },
   ]
 
-  // Duplicate projects for seamless looping
-  const projects = [...projectsData, ...projectsData]
-  const containerRef = useRef<HTMLDivElement>(null)
-  const scrollSpeed = 1 // pixels per frame
-  let animationFrameId: number
-  let scrollPosition = 0
-  let isPaused = false
-
-  const animateScroll = () => {
-    if (!containerRef.current || isPaused) return
-    
-    const container = containerRef.current
-    const containerWidth = container.scrollWidth / 2 // Since we duplicated the items
-    
-    scrollPosition += scrollSpeed
-    
-    // Reset scroll position when we've scrolled one full width
-    if (scrollPosition >= containerWidth) {
-      scrollPosition = 0
-    }
-    
-    container.scrollLeft = scrollPosition
-    animationFrameId = requestAnimationFrame(animateScroll)
+  const toggleProject = (index: number) => {
+    setExpandedProject(expandedProject === index ? null : index)
   }
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-    
-    // Start animation
-    animationFrameId = requestAnimationFrame(animateScroll)
-    
-    // Pause on hover
-    const handleMouseEnter = () => { isPaused = true }
-    const handleMouseLeave = () => { isPaused = false; animateScroll() }
-    
-    container.addEventListener('mouseenter', handleMouseEnter)
-    container.addEventListener('mouseleave', handleMouseLeave)
-    
-    return () => {
-      cancelAnimationFrame(animationFrameId)
-      container.removeEventListener('mouseenter', handleMouseEnter)
-      container.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, [])
-
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="section-heading">
-              Featured <span className="gradient-text">Projects</span>
-            </h2>
-            <div className="w-20 h-1 mt-4 mb-8 accent-gradient rounded-full mx-auto"></div>
-            <p className="section-subheading">
-              Innovative solutions that showcase my expertise in onchain, AI, and web technologies
-            </p>
+    <section id="projects" className="py-20 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+            My Projects
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+            A collection of my latest projects showcasing my skills in web development, AI, and modern technologies.
+          </p>
+        </div>
+
+        <div ref={ref} className="relative">
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projectsData.map((project, index) => (
+              <ProjectCard 
+                key={project.title}
+                project={project}
+                isExpanded={expandedProject === index}
+                onToggle={() => toggleProject(index)}
+              />
+            ))}
           </div>
 
-          <div ref={ref}>
-            {/* Projects Illustration */}
-            <div className="h-[120px] mb-16 illustration-container">
-              <ProjectsIllustration animate={inView} />
-            </div>
-
-            {/* Horizontal Scroll Container */}
-            <div 
-              ref={containerRef}
-              className="flex overflow-x-hidden py-4 gap-6 scrollbar-hide"
-              style={{
-                maskImage: 'linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent)',
-                WebkitMaskImage: '-webkit-linear-gradient(left, transparent, #000 20px, #000 calc(100% - 20px), transparent)',
-              }}
-            >
-              {projects.map((project, index) => (
-                <div 
-                  key={`${index}-${project.title}`} 
-                  className="project-card flex-shrink-0 w-[300px] group relative rounded-xl overflow-hidden transition-transform hover:scale-105"
-                  style={{ scrollSnapAlign: 'start' }}
-                >
-                  <div className="relative w-full h-64">
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={index < 3} // Only prioritize first few images
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-                    <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                    <p className="text-sm text-neutral-200 mb-4">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <Badge key={tagIndex} variant="secondary" className="bg-white/20 text-white border-none">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <Button size="sm" variant="default" className="bg-white text-neutral-900 hover:bg-neutral-200 w-fit" onClick={() => window.open(project.link, '_blank')}>
-                      View Project
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <Button variant="outline" size="lg" className="mt-2">
-                View All Projects
-              </Button>
-            </div>
-          </div>
+          {/* Decorative elements */}
+          <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-gradient-radial from-blue-500/10 to-transparent rounded-full blur-3xl opacity-70"></div>
+          <div className="absolute -z-20 top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+          <div className="absolute -z-20 -bottom-8 left-0 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
         </div>
       </div>
     </section>

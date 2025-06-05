@@ -31,8 +31,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${manrope.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Header />
-          {children}
+          <div className="relative min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1 w-full">
+              {children}
+            </main>
+          </div>
           <Toaster
             position="bottom-right"
             richColors

@@ -1,47 +1,136 @@
 "use client"
 
 import { useInView } from "react-intersection-observer"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { useTheme } from "next-themes"
 import { Card, CardContent } from "@/components/ui/card"
 import { TechFlowIllustration } from "@/components/illustrations/tech-flow-illustration"
+
+interface TechLogo {
+  name: string
+  logoLight: string
+  category: string
+  description: string
+}
 
 export default function Technologies() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+  const { resolvedTheme } = useTheme()
 
-  const technologies = [
-    {
-      category: "Onchain",
-      items: [
-        { name: "Coinbase SDK", description: "Payment & trading integration" },
-        { name: "Base Layer2", description: "Ethereum scaling solutions" },
-        { name: "USDC Payments", description: "Digital dollar payments" },
-        { name: "Smart Contracts", description: "Solidity development" },
-      ],
-    },
-    {
-      category: "AI & ML",
-      items: [
-        { name: "AI Agents", description: "Autonomous systems development" },
-        { name: "Cursor", description: "AI-powered code editor" },
-        { name: "AI SDK", description: "AI Integration" },
-        { name: "V0", description: "AI UI/UX generation" },
-      ],
-    },
-    {
+  const allLogos: TechLogo[] = [
+    // Web Development
+    { 
+      name: "Next.js", 
+      logoLight: "/Next.js_wordmark_light.svg", 
       category: "Web Development",
-      items: [
-        { name: "Next.js", description: "React framework" },
-        { name: "Vercel", description: "Deployment platform" },
-        { name: "Supabase", description: "Backend as a service" },
-        { name: "TypeScript", description: "Type-safe JavaScript" },
-      ],
+      description: "React framework" 
+    },
+    { 
+      name: "Vercel", 
+      logoLight: "/Vercel_wordmark_light.svg", 
+      category: "Web Development",
+      description: "Deployment platform" 
+    },
+    { 
+      name: "Supabase", 
+      logoLight: "/Supabase_wordmark_light.svg", 
+      category: "Web Development",
+      description: "Database & auth" 
+    },
+    { 
+      name: "Tailwind", 
+      logoLight: "/Tailwind CSS_wordmark_light.svg", 
+      category: "Web Development",
+      description: "Utility-first CSS" 
+    },
+    
+    // AI & ML
+    { 
+      name: "V0", 
+      logoLight: "/v0_light.svg", 
+      category: "AI & ML",
+      description: "AI UI/UX generation" 
+    },
+    { 
+      name: "OpenAI", 
+      logoLight: "/OpenAI_wordmark_light.svg", 
+      category: "AI & ML",
+      description: "AI models & APIs" 
+    },
+    { 
+      name: "Gemini", 
+      logoLight: "/gemini_wordmark.svg", 
+      category: "AI & ML",
+      description: "Google's AI models" 
+    },
+    { 
+      name: "Grok", 
+      logoLight: "/Grok_wordmark_light.svg", 
+      category: "AI & ML",
+      description: "AI assistant" 
+    },
+    
+    // Onchain
+    { 
+      name: "Ethereum", 
+      logoLight: "/ethereum_light.svg", 
+      category: "Onchain",
+      description: "Smart contracts" 
+    },
+    { 
+      name: "Base", 
+      logoLight: "/base_light.svg", 
+      category: "Onchain",
+      description: "Ethereum L2" 
+    },
+    { 
+      name: "USDC", 
+      logoLight: "/usdc_light.svg", 
+      category: "Onchain",
+      description: "Digital dollar" 
+    },
+    { 
+      name: "Coinbase", 
+      logoLight: "/coinbase_light.svg", 
+      category: "Onchain",
+      description: "Crypto services" 
     },
   ]
 
+  const categories = ["Web Development", "AI & ML", "Onchain"]
+
+  const getLogoPath = (tech: TechLogo) => {
+    if (!tech) return "/placeholder.svg"
+    return tech.logoLight
+  }
+
+  const LogoCard = ({ tech }: { tech: TechLogo }) => (
+    <motion.div
+      className="flex flex-col items-center p-6 rounded-lg hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50 transition-colors h-full"
+      whileHover={{ y: -4, scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    >
+      <div className="relative w-32 h-20 flex items-center justify-center mb-3">
+        <Image
+          src={getLogoPath(tech)}
+          alt={tech.name}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 128px, 160px"
+        />
+      </div>
+      <p className="text-sm text-center text-neutral-600 dark:text-neutral-400 mt-1">
+        {tech.description}
+      </p>
+    </motion.div>
+  )
+
   return (
-    <section id="technologies" className="py-20 bg-neutral-100 dark:bg-neutral-900">
+    <section id="technologies" className="py-20">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -60,27 +149,23 @@ export default function Technologies() {
               <TechFlowIllustration animate={inView} />
             </div>
 
-            {/* Technologies Grid */}
-            <div className="tech-grid">
-              {technologies.map((tech, categoryIndex) => (
-                <Card key={categoryIndex} className="hover-card-effect">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-6">{tech.category}</h3>
-                    <div className="space-y-6">
-                      {tech.items.map((item, itemIndex) => (
-                        <div key={itemIndex} className="flex items-start">
-                          <div className="tech-icon mr-4">
-                            <span className="text-lg">{itemIndex + 1}</span>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">{item.name}</h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400">{item.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+            {/* Technologies by Category */}
+            <div className="space-y-16">
+              {categories.map((category) => (
+                <div key={category} className="space-y-8">
+                  <h3 className="text-2xl font-bold text-center">{category}</h3>
+                  <Card className="overflow-hidden bg-transparent border border-neutral-200/50 dark:border-neutral-800/50">
+                    <CardContent className="p-6 bg-transparent">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        {allLogos
+                          .filter(tech => tech.category === category)
+                          .map((tech, index) => (
+                            <LogoCard key={`${category}-${index}`} tech={tech} />
+                          ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>

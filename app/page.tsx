@@ -9,8 +9,8 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
       <Hero />
       <About />
-      <Technologies />
       <Projects />
+      <Technologies />
       <Footer />
     </main>
   )

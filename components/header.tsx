@@ -9,8 +9,8 @@ import { ContactDialog } from "@/components/contact-dialog"
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Technologies", href: "#technologies" },
   { name: "Projects", href: "#projects" },
+  { name: "Technologies", href: "#technologies" },
 ]
 
 export default function Header() {

@@ -1,9 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { useForm } from '@formspree/react';
 import { Button } from "@/components/ui/button"
-import { Loader2, X } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import {
   Dialog,
@@ -15,10 +14,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
-const FORMSPREE_ID = "mnndpkll"
-
 export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
-  const [state, handleSubmit] = useForm(FORMSPREE_ID);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,15 +29,25 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsSubmitting(true)
     
-    // Show loading toast
     const toastId = toast.loading("Sending your message...")
     
     try {
-      // Submit the form using Formspree's handleSubmit
-      const response = await handleSubmit(e as React.FormEvent<HTMLFormElement>)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
       
-      // If we get here, the submission was successful
       toast.success("Thank you!", {
         id: toastId,
         description: "I'll get back to you soon!",
@@ -53,9 +60,11 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
       console.error('Form submission error:', error)
       toast.error("Failed to send message", {
         id: toastId,
-        description: "Please try again or contact me directly at tushar.base.eth@gmail.com",
+        description: error instanceof Error ? error.message : "Please try again or contact me directly at tushar.base.eth@gmail.com",
         duration: 5000,
       })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -79,7 +88,7 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
               placeholder="Your name"
               value={formData.name}
               onChange={handleChange}
-              disabled={state.submitting}
+              disabled={isSubmitting}
               required
             />
           </div>
@@ -98,7 +107,7 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
               placeholder="your@email.com"
               value={formData.email}
               onChange={handleChange}
-              disabled={state.submitting}
+              disabled={isSubmitting}
               required
             />
           </div>
@@ -114,7 +123,7 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              disabled={state.submitting}
+              disabled={isSubmitting}
               required
             />
           </div>
@@ -124,15 +133,15 @@ export function ContactDialog({ open, onOpenChange }: { open: boolean; onOpenCha
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              disabled={state.submitting}
+              disabled={isSubmitting}
             >
               Cancel
             </Button>
             <Button 
               type="submit" 
-              disabled={state.submitting}
+              disabled={isSubmitting}
             >
-              {state.submitting ? (
+              {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Sending...
